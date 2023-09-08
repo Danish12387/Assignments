@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Expense Calculator</title>
+    <style>
+        *{
+            box-sizing: border-box;
+        }
+        body{
+            font-size: 1.5rem;
+        }
+        h2{
+            text-align: center;
+        }
+        .counter{
+            display: flex;
+            align-items: center;
+            justify-content: space-evenly;
+        }
+        .number{
+            display: flex;
+            align-items: center;
+            justify-content: space-evenly;
+        }
+        .cal{
+            margin: 20px;
+            font-size: 28px;
+        }
+        .input{
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <h2>Javascript Expense Calculator</h2>
+    <div class="container">
+        <div class="counter">
+            <div id="income">Income</div>
+            <div id="expense">Expense</div>
+            <div id="profit loss">Profit Loss</div>
+        </div>
+        <div class="number">
+            <div id="cal-Income" class="cal">0</div>
+            <div id="cal-Expense" class="cal">0</div>
+            <div id="cal-Profit Loss" class="cal">0</div>
+        </div>
+        <div class="input">
+            <input type="number" id="input">
+            <button id="inc-btn" onclick="Income()">Income</button>
+            <button id="exp-btn" onclick="expense()">Expense</button>
+        </div>
+        </div>
+    </div>
+    <script>
+        let CalIncome = document.getElementById('cal-Income')
+        let input = document.getElementById('input').value
+        let CalProfitLoss = document.getElementById('cal-Profit Loss')
+        function Income(){
+            CalIncome.innerHTML = input
+            CalProfitLoss.innerHTML = input
+
+        }
+    </script>
+</body>
+</html>

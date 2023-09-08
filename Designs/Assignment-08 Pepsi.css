@@ -1,0 +1,348 @@
+@import url("https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Satisfy&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap");
+
+
+body {
+    background-color: #0065c3;
+    color: white;
+    margin: 0;
+    width: 100%;
+}
+
+nav {
+    height: 100px;
+    display: flex;
+    align-items: center;
+}
+
+.navbar {
+    display: flex;
+    align-items: center;
+}
+
+nav .nav-img img {
+    height: 70px;
+    width: 70px;
+}
+
+nav .nav-img {
+    width: 120px;
+    margin-right: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+nav .nav-img img:hover {
+    animation-name: pepsi;
+    animation-timing-function: ease-out;
+    animation-duration: .5s;
+    animation-fill-mode: forwards;
+}
+
+@keyframes pepsi {
+    0% {
+        rotate: 0deg;
+    }
+
+    50% {
+        rotate: 410deg;
+    }
+
+    75% {
+        rotate: 345deg;
+    }
+
+    100% {
+        rotate: 360deg;
+    }
+
+}
+
+.navbar .nav-text {
+    width: 550px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+}
+
+.navbar .nav-text a {
+    text-decoration: none;
+    font-size: 17px;
+    color: white;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    font-weight: bolder;
+    text-transform: uppercase;
+    /* margin-left: 20px; */
+}
+
+.navbar .nav-text li {
+    list-style-type: none;
+    position: relative;
+}
+
+.navbar .nav-text li::before {
+    content: "";
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background-color: white;
+    transition: .3s;
+}
+
+.navbar .nav-text li:hover::before {
+    width: 100%;
+}
+
+.nav-btn {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    width: 600px;
+}
+
+.nav-btn button {
+    height: 34px;
+    width: 200px;
+    text-transform: uppercase;
+    background-color: transparent;
+    border: 2px solid white;
+    border-radius: 50px;
+    color: white;
+    cursor: pointer;
+    font-family: rubik;
+}
+
+head {
+    width: 100%;
+}
+
+.bottles {
+    padding-top: 80px;
+    position: relative;
+    right: 120px;
+}
+
+.bottles img {
+    height: 650px;
+    width: 800px;
+}
+
+.head-text {
+    position: relative;
+    right: 150px;
+    bottom: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.head-container {
+    width: 100%;
+    scroll-snap-type: y mandatory;
+}
+
+.sub-container {
+    background-image: url(https://www.pepsi.com/en-us/uploads/images/apple-music/background.png);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    display: flex;
+    align-items: center;
+    position: relative;
+    scroll-snap-align: start;
+    z-index: -2;
+}
+
+.head-img {
+    /* padding-bottom: 190px; */
+}
+
+.head-text button {
+    margin-bottom: 50px;
+    margin-top: 50px;
+    border: 2px solid white;
+    border-radius: 50px;
+    background: transparent;
+    color: white;
+    padding: 9px 32px;
+    font-family: roboto;
+    font-weight: bolder;
+    letter-spacing: 1.5px;
+    font-size: 14px;
+    cursor: pointer;
+}
+
+.head-text p {
+    margin: 0;
+    margin-bottom: 50px;
+    font-size: 12px;
+    text-align: center;
+    width: 90%;
+}
+
+.head-bottom {
+    background-color: #000;
+    width: 100;
+    position: relative;
+    z-index: -1;
+    bottom: 80px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.head-r-img {
+    height: 687px;
+    width: 800px;
+}
+
+.head-r-img img {
+    height: 800px;
+    width: 1000px;
+    position: absolute;
+    right: 420px;
+    /* top: 720px; */
+    bottom: 0px;
+    z-index: 1;
+}
+
+.head-r-img-2 {
+    position: absolute;
+    z-index: 2;
+    left: 488px;
+    /* top: 850px; */
+    bottom: 450px;
+}
+
+.head-bottom-img {
+    /* background-color: blue; */
+    height: 0px;
+    width: 500px;
+    margin-right: 90px;
+    margin-bottom: 130px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.head-bottom-img .img {
+    /* background-color: brown; */
+    /* margin-bottom: 90px; */
+}
+
+.head-bottom-img .img img {
+    height: 500px;
+    width: 500px;
+}
+
+.head-bottom-img .img-2 {
+    position: absolute;
+    top: 360px;
+    right: 165px;
+}
+
+.head-bottom-img .img-2 img {
+    height: 100px;
+    width: 350px;
+}
+
+.promotion-videos {
+    margin: 0;
+    width: 500px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.promotion-videos .head {
+    margin: 0;
+    height: 100%;
+    width: 100%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.promotion-videos button {
+    width: 3rem;
+    height: 3rem;
+    background: transparent;
+}
+
+.promotion-videos button svg {
+    overflow: hidden;
+}
+
+.promotion-videos p {
+    font-size: .75rem;
+    padding: 0;
+    margin: 0;
+}
+
+.promotion-videos .sub-head {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 110px;
+    /* background-color: brown; */
+    width: 232.6px;
+    margin: 0;
+    background-image: url(https://www.pepsi.com/en-us/uploads/images/pzs-new-taste/gagt_steve.png);
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    cursor: pointer;
+}
+
+.promotion-videos #sub-head-2 {
+    background-image: url(Imgages/pepsi\ img.png);
+}
+
+.promotion-videos .sub {
+    /* position: relative; */
+    /* z-index: 5; */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 60%;
+    width: 50%;
+    /* background-color: #6bb8ff; */
+    margin: 0;
+}
+
+/* .promotion-videos .img{
+    height: 100%;
+    width: 100%;
+    position: relative;
+    top: 0px;
+    bottom: 65px;
+}
+.promotion-videos .img img{
+    position: absolute;
+    margin: 0;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+} */
+.head-p{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    font-size: 12px;
+    width: 104%;
+}
+.head-p p{
+    text-align: center;
+    width: 40%;
+}

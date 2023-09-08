@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Form</title>
+    <style>
+        .h2 {
+            border: 2px solid ;
+            padding: 40px;
+            align-items: center;
+            margin-right: 200px;
+            margin-left: 200px;
+            background-color: lime;
+        }
+
+        .input {
+            padding-right: 200px;
+        }
+
+        .option {}
+
+        #button {
+            background-color: rgb(44, 181, 226);
+            border-radius: 4px;
+            padding-left: 100px;
+            padding-right: 100px;
+            padding-top: 4px;
+            padding-bottom: 4px;
+            border-color: rgb(44, 181, 226);
+            cursor: pointer;
+        }
+        #body{
+            background-color: ;
+        }
+        .birth{
+            width: 5%;
+        }
+    </style>
+</head>
+
+<body id="body">
+    <center>
+        <h1 class="h2">Student Registration Form</h1>
+    </center>
+    <form style="margin-left: 350px;" action="Assignment 04/Congrats.html">
+        <label>
+            Name:
+            <input type="text" placeholder="Enter full name" style="margin-left: 95px;" class="input" required>
+        </label>
+        <br><br>
+        <label>
+            Father's Name:
+            <input type="text" style="margin-left: 40px;" class="input" required>
+        </label>
+        <br><br>
+        <label>
+            Mother's Name:
+            <input type="text" style="margin-left: 34px;" class="input" required>
+        </label>
+        <br><br>
+        <label>
+            Phone Number:
+            <input type="text" placeholder="03xxxxxxxxx" maxlength="11" style="margin-left: 36px;" class="input" required>
+        </label>
+        <br><br>
+        <label>
+            Email:
+            <input type="email" placeholder="sample@example.com" style="margin-left: 93px;" class="input" required>
+        </label>
+        <br><br>
+        Gender:
+        <label style="margin-left: 80px;">
+            <input type="radio" name="gender" value="male">Male
+        </label>
+        <label>
+            <input type="radio" name="gender" value="female">Female
+        </label>
+        <label>
+            <input type="radio" name="gender" value="other">Other
+        </label>
+        <br><br>
+        <label>
+            Date Of Birth:
+            <label style="margin: 44px;">
+
+                <label>
+                    <input type="number" maxlength="2" style="padding-left: 30px;" class="birth">
+                </label>
+                -
+                <label>
+                    <input type="number" maxlength="2" class="birth">
+                </label>
+                -
+                <label>
+                    <input type="number" class="birth"> <i>(dd-mm-yyyy)</i>
+                </label>
+            </label>
+
+        </label>
+        <br><br>
+        <label>
+            Address:
+            <input type="text" placeholder="Street- House- Road" class="input" style="margin-left: 78px;">
+        </label>
+        <br><br>
+        Bloud Group:
+        <select name="bloudgroup" id="" style="margin-left: 47px;">
+            <option value="select" selected>----Select----</option>
+            <option value="A+" class="option">A+</option>
+            <option value="A+" class="option">O+</option>
+            <option value="A+" class="option">A-</option>
+            <option value="A+" class="option">O+</option>
+        </select>
+        <br><br>
+        <label>
+            Department:
+            <label style="margin-left: 49px;">
+                <input type="radio" name="department">CSE
+            </label>
+            <label>
+                <input type="radio" name="department">EEE
+            </label>
+            <label>
+                <input type="radio" name="department">BBA
+            </label>
+        </label>
+        <br><br>
+        <label>
+            Course:
+            <label style="margin-left: 80px;">
+                <input type="checkbox" name="checkbox">C
+            </label>
+            <label>
+                <input type="checkbox" name="checkbox">C++
+            </label>
+            <label>
+                <input type="checkbox" name="checkbox">Java
+            </label>
+            <label>
+                <input type="checkbox" name="checkbox">AI
+            </label>
+            <label>
+                <input type="checkbox" name="checkbox">Machine Learning
+            </label>
+            <label>
+                <input type="checkbox" name="checkbox">Machine Learning
+            </label>
+            <label>
+                <input type="checkbox" name="checkbox">Robotics
+            </label>
+        </label>
+        <br><br>
+        Photo:
+        <label style="margin-left: 90px;">
+            <input type="file">
+        </label>
+        <br><br>
+        <button style="margin-left: 220px;" id="button">Submit</button>
+    </form>
+</body>
+
+</html>

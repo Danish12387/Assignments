@@ -1,0 +1,107 @@
+@import url("https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Satisfy&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap");
+
+body{
+    font-family: "roboto";
+}
+
+.container{
+    display: flex;
+    border: 2px solid rgb(219, 219, 219);
+    border-radius: 35px;
+    background-color: rgb(247, 247, 247);
+    margin-bottom: 200px;
+}
+.text{
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    margin-top: 180px;
+    margin-left: 60px;
+    width: 40%;
+}
+.text h1{
+    width: 50%;
+    letter-spacing: 2px;
+}
+.img{
+    margin-right: 0px;
+}
+.img img{
+    height: 600px;
+    width: 600px;
+    margin-left: 65px;
+}
+h3{
+    font-size: 22px;
+    margin-bottom: 2px;
+    margin-top: 2px;
+}
+span{
+    color: rgb(123, 206, 0);
+}
+#span{
+    color: rgb(0, 0, 255);
+}
+p{
+    font-weight: 600;
+    letter-spacing: 0.6px;
+    word-spacing: 2px;
+}
+button{
+    width: 35%;
+    padding-top: 18px;
+    padding-bottom: 18px;
+    font-weight: bold;
+    border: 1px solid black;
+    border-radius: 7px;
+    background-color: rgb(238, 238, 238);
+    cursor: pointer;
+}
+button:hover{
+    background-color: white;
+}
+hr{
+    width: 1200px;
+}
+.bottom{
+    margin-top: 200px;
+    margin-bottom: 100px;
+}
+.heading h1{
+    font-family: "Roboto";
+    text-align: center;
+}
+.box{
+    background-color: rgba(170, 226, 67, 0.2);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 175px;
+    height: 160px;
+    border-radius: 10px;
+    padding-top: 10px;
+}
+.box:hover{
+    padding: 10px;
+    background-color: rgba(186, 250, 68, 0.2);
+}
+
+.boxes{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-right: 30px;
+    margin-left: 30px;
+    margin-top: 80px;
+}
+.main{
+    margin: 0;
+    height: 45%;
+}
+.welfare{
+    height: 30%;
+    font-size: 1.3rem;
+}
