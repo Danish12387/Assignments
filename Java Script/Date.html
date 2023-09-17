@@ -11,39 +11,108 @@
             text-align: center;
             font-size: 24px;
         }
+
+        input {
+            font-size: 1.2rem;
+            border-radius: 10px;
+            cursor: pointer;
+        }
+
+        button {
+            width: 100px;
+            height: 40px;
+            border-radius: 5px;
+            background-color: rgb(0, 204, 0);
+            color: white;
+            border: none;
+            font-size: 1.05rem;
+            cursor: pointer;
+            transition: all .2s ease-in-out;
+            display: block;
+            margin: 10px auto;
+        }
+
+        button:hover {
+            transform: scale(1.1);
+            background-color: rgb(53, 180, 53);
+        }
     </style>
 </head>
 
 <body>
     <h2></h2>
     <input type="date" placeholder="Enter your age." id="input">
-    <button onclick="calculateAge()">Check</button>
+    <button onclick="Check()">Check</button>
     <div id="result"></div>
     <script>
         //Question 01
 
-        let date = new Date()
-        let day = date.getDate()
-        let month = date.getMonth() + 1
-        let year = date.getFullYear()
-        let FullDate = `${month}/${day}/${year}`
-        let h2 = document.querySelector('h2')
-        h2.innerHTML = FullDate
+        // let date = new Date()
+        // let day = date.getDate()
+        // let month = date.getMonth() + 1
+        // let year = date.getFullYear()
+        // let FullDate = `${month}/${day}/${year}`
+        // let h2 = document.querySelector('h2')
+        // h2.innerHTML = FullDate
 
 
-        //Question 02
+        // //Question 02
 
-        function calculateAge() {
-            let userAgeInput = document.getElementById('input').value
-            let userAge = new Date(userAgeInput)
-            let today = new Date()
-            let age = today.getFullYear() - userAge.getFullYear()
-            if (today.getMonth() < userAge.getMonth() || today.getMonth() === userAge.getMonth() && today.getDate() < userAge.getDate()){
-                age--
-            }
-            let result = document.getElementById('result')
-            result.innerHTML = `Your age is ${age}.`
-        }
+        // function Check() {
+        //     let userAgeInput = document.getElementById('input').value
+        //     let userAge = new Date(userAgeInput)
+        //     let today = new Date()
+        //     let age = today.getFullYear() - userAge.getFullYear()
+        //     if (today.getMonth() < userAge.getMonth() || today.getMonth() === userAge.getMonth() && today.getDate() < userAge.getDate()){
+        //         age--
+        //     }
+        //     let result = document.getElementById('result')
+        //     result.innerHTML = `Your age is ${age}.`
+        // }
+
+
+        //Question 03
+
+        // const enteredDate = prompt('Enter a date (MM-DD-YYYY):')
+        // const date = new Date(enteredDate)
+        // if(isNaN(date)){
+        //     alert('Invalid date format. Please enter a valid date in the format (MM-DD-YYYY).')
+        // }
+        // else{
+        //     const weekDays = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday']
+        //     const dayOfWeek = date.getDay()
+        //     alert('The day of the week for ' + enteredDate + ' is ' + weekDays[dayOfWeek] + '.')
+        // }
+
+
+        //Question 04
+
+        // function Check() {
+        //     let futureDate = document.getElementById('input').value
+        //     let date = new Date(futureDate)
+        //     let today = new Date()
+        //     let calculateDays = date.getTime() - today.getTime()
+        //     let formattedDays = calculateDays/1000 /60 /60 /24
+        //     let result = document.getElementById('result')
+        //     result.innerHTML = Math.round(formattedDays) + ' days left until ' + futureDate + '.'
+        // }
+
+
+        //Question 05
+
+        // function Check() {
+        //     let date = document.getElementById('input').value
+        //     let newDate = new Date(date)
+        //     let checkDate = newDate.getDay()
+        //     console.log(checkDate)
+        //     let result = document.getElementById('result')
+        //     if (checkDate == 5 || checkDate == 6) {
+        //         result.innerHTML = 'The day on ' + date + ' is a weekened day.'
+        //     }
+        //     else{
+        //         result.innerHTML = 'The day on ' + date + ' is not a weekened day.'
+        //     }
+        // }
     </script>
 </body>
 
