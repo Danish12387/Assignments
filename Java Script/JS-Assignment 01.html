@@ -1,45 +1,90 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Expense Calculator</title>
     <style>
-        *{
+        * {
             box-sizing: border-box;
         }
-        body{
+
+        body {
             font-size: 1.5rem;
+            font-family: sans-serif;
         }
-        h2{
+
+        h2 {
             text-align: center;
         }
-        .counter{
+
+        .counter {
             display: flex;
             align-items: center;
             justify-content: space-evenly;
         }
-        .number{
+
+        .number {
             display: flex;
             align-items: center;
             justify-content: space-evenly;
         }
-        .cal{
+
+        .cal {
             margin: 20px;
             font-size: 28px;
         }
-        .input{
+
+        .input {
             text-align: center;
+        }
+
+        button {
+            height: 40px;
+            width: 100px;
+            border-radius: 10px;
+            cursor: pointer;
+            font-size: 16px;
+            color: white;
+            transition: all .3s ease;
+        }
+
+        button:hover {
+            transform: scale(1.1);
+        }
+
+        input {
+            height: 40px;
+            border-radius: 10px;
+            font-size: 1.1rem;
+            border: 2px solid grey;
+        }
+
+        #inc-btn {
+            background-color: rgb(0, 216, 0);
+            border: 2px solid rgb(0, 172, 0);
+        }
+
+        #exp-btn {
+            background-color: rgb(255, 0, 0);
+            border: 2px solid rgb(177, 0, 0);
+        }
+
+        #reset {
+            background-color: rgb(0, 183, 255);
+            border: 2px solid rgb(0, 183, 255);
         }
     </style>
 </head>
+
 <body>
     <h2>Javascript Expense Calculator</h2>
     <div class="container">
         <div class="counter">
-            <div id="income">Income</div>
-            <div id="expense">Expense</div>
-            <div id="profit loss">Profit Loss</div>
+            <div id="income" style="color: rgb(3, 182, 3);">Income</div>
+            <div id="expense" style="color: red;">Expense</div>
+            <div id="profit loss" style="color: red;"><span style="color: rgb(3, 182, 3);">Profit</span> Loss</div>
         </div>
         <div class="number">
             <div id="cal-Income" class="cal">0</div>
@@ -47,21 +92,44 @@
             <div id="cal-Profit Loss" class="cal">0</div>
         </div>
         <div class="input">
-            <input type="number" id="input">
+            <input type="number" placeholder="$0.00" id="input">
             <button id="inc-btn" onclick="Income()">Income</button>
-            <button id="exp-btn" onclick="expense()">Expense</button>
+            <button id="exp-btn" onclick="Expense()">Expense</button>
+            <button id="reset" onclick="Reset()">Reset</button>
         </div>
-        </div>
+    </div>
     </div>
     <script>
         let CalIncome = document.getElementById('cal-Income')
-        let input = document.getElementById('input').value
-        let CalProfitLoss = document.getElementById('cal-Profit Loss')
-        function Income(){
-            CalIncome.innerHTML = input
-            CalProfitLoss.innerHTML = input
+        let CalIncomeToNum = +CalIncome.innerHTML
 
+        let CalExpense = document.getElementById('cal-Expense')
+        let CalExpenseToNum = +CalExpense.innerHTML
+
+        let CalProfitLoss = document.getElementById('cal-Profit Loss')
+        let CalProfitLossToNum = +CalProfitLoss.innerHTML
+
+        let input = document.getElementById('input')
+        
+        function Income() {
+            const INput = +input.value
+            CalIncomeToNum += INput
+            CalIncome.innerHTML = CalIncomeToNum
+            CalProfitLossToNum += INput
+            CalProfitLoss.innerHTML = CalProfitLossToNum
         }
+
+        function Expense() {
+            const INput = +input.value
+            CalExpenseToNum += INput
+            CalExpense.innerHTML = CalExpenseToNum
+            CalProfitLoss.innerHTML -= input.value
+        }
+        
+        function Reset() {
+            input.value = ''
+        }
+
     </script>
 </body>
 </html>
