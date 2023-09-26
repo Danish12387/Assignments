@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Score Tracker</title>
+    <style>
+        table{
+            width: 100%;
+            margin-top: 50px;
+        }
+        th{
+            background-color: rgb(0, 235, 156);
+            text-align: center;
+            font-size: 20px;
+            color: white;
+            border: 1px solid rgb(138, 138, 138);
+        }
+        td{
+            text-align: center;
+            font-size: 20px;
+            border: 1px solid rgb(138, 138, 138);
+        }
+        input{
+            width: 400px;
+            height: 40px;
+            font-size: 16px;
+        }
+        button{
+            width: 100px;
+            height: 45px;
+            border-radius: 5px;
+            border: none;
+            background-color: rgb(0, 235, 156);
+            cursor: pointer;
+            transition: all .2s ease-in-out;
+            font-size: 15px;
+            color: white;
+            font-weight: bold;
+        }
+        button:hover{
+            background-color: rgb(0, 197, 131);
+        }
+    </style>
+</head>
+<body>
+    <input type="text" id="nameInput" placeholder="Name">
+    <input type="text" id="fatherNameInput" placeholder="Father Name">
+    <input type="number" id="scoreInput" placeholder="Score">
+    <button onclick="addEntry()">Submit</button>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Father Name</th>
+                <th>Score</th>
+                <th>Total</th>
+            </tr>
+        </thead>
+        <tbody id="tableBody">
+            <!-- Data will be added here -->
+        </tbody>
+    </table>
+
+    <!-- <p>Total Score: <span id="totalScore">0</span></p> -->
+
+    <script>
+        // Initialize total score
+let totalScore = 0;
+
+// Function to add entry to the table
+function addEntry() {
+    // Get input values
+    let name = document.getElementById('nameInput').value;
+    let fatherName = document.getElementById('fatherNameInput').value;
+    let score = parseInt(document.getElementById('scoreInput').value);
+
+    // Update total score
+    totalScore += score;
+    
+    // Create a new row
+    let table = document.getElementById('tableBody');
+    let newRow = table.insertRow(-1);
+
+    // Insert data into the row
+    let cell1 = newRow.insertCell(0);
+    let cell2 = newRow.insertCell(1);
+    let cell3 = newRow.insertCell(2);
+    let cell4 = newRow.insertCell(3);
+
+    cell1.innerHTML = name;
+    cell2.innerHTML = fatherName;
+    cell3.innerHTML = score;
+    cell4.innerHTML = totalScore;
+
+    // Clear input fields
+    document.getElementById('nameInput').value = '';
+    document.getElementById('fatherNameInput').value = '';
+    document.getElementById('scoreInput').value = '';
+    
+    // Update total score display
+    // document.getElementById('totalScore').innerHTML = totalScore;
+}
+
+    </script>
+</body>
+</html>
