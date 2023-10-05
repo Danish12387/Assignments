@@ -113,6 +113,30 @@
         //         result.innerHTML = 'The day on ' + date + ' is not a weekened day.'
         //     }
         // }
+
+
+        //Question 06
+
+        function Check() {
+            let date = document.getElementById('input').value
+            let newDate = new Date(date).getTime()
+            let currentDate = new Date().getTime()
+            let timeRemaining = newDate - currentDate
+            const days = Math.floor(timeRemaining / 1000 / 60 / 60 / 24)
+            const hours = Math.floor((timeRemaining % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60))
+            const minutes = Math.floor((timeRemaining % (1000 * 60 * 60)) / (1000 * 60))
+            const seconds = Math.floor((timeRemaining % (1000 * 60)) / (1000))
+
+            let result = document.getElementById('result')
+            result.innerHTML = `${days} days, ${hours} hours, ${minutes} minutes, ${seconds} seconds`
+            if (timeRemaining <= 0){
+                clearInterval(interval)
+                result.innerHTML = 'Countdown expired!'
+            }
+            Check()
+            const interval = setInterval(Check, 1000)
+        }
+        
     </script>
 </body>
 

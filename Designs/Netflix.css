@@ -16,7 +16,7 @@ body{
     height: 95vh;
     color: #ffff;   
     position: relative;
-    z-index: -3;
+    z-index: 1;
 }
 .Sub-container{
     height: 100%;
@@ -79,22 +79,29 @@ nav .button button{
     font-size: 15px;
     font-weight: bold;
     cursor: pointer;
+    transition: transform .2s ease-in-out;
+    transition: transform .2s ease-out, background-color .5s ease-in-out;
 }
 nav .button button:hover{
     background-color: rgb(214, 0, 0);
+    transform: scale(1.1);
 }
 .input{
     width: 580px;
-    background-color: blue;
     display: flex;
     justify-content: space-evenly;
 }
 .input input{
     height: 50px;
     width: 350px;
+    border-radius: 5px;
+    background-color: rgba(0, 0, 0, 0.4);
+    border: 1px solid grey;
 }
 .input input::placeholder{
-    font-size: 18px
+    font-size: 18px;
+    padding-left: 10px;
+    color: rgb(173, 173, 173);
 }
 .input button{
     height: 52px;
@@ -105,4 +112,10 @@ nav .button button:hover{
     color: white;
     border: none;
     border-radius: 3px;
+    cursor: pointer;
+    transition: transform .2s ease-out, background-color .5s ease-out;
+}
+.input button:hover{
+    background-color: rgb(194, 0, 0);
+    transform: scale(1.05);
 }
