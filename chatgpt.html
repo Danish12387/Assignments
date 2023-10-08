@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Image Popup Card</title>
+    <style>
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+        }
+
+        .card {
+            display: inline-block;
+            cursor: pointer;
+        }
+
+        .popup {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            text-align: center;
+        }
+
+        .popup-content {
+            margin: 20px auto;
+            max-width: 80%;
+            max-height: 80%;
+        }
+
+        .close {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            font-size: 30px;
+            cursor: pointer;
+            color: white;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="card">
+        <img src="image.jpg" alt="Image" id="cardImage">
+    </div>
+
+    <div class="popup" id="imagePopup">
+        <span class="close" id="closePopup">&times;</span>
+        <img src="Imgages/logo.jpg" alt="Image" class="popup-content" id="popupImage">
+    </div>
+
+    <script>
+        const cardImage = document.getElementById('cardImage');
+        const imagePopup = document.getElementById('imagePopup');
+        const popupImage = document.getElementById('popupImage');
+        const closePopup = document.getElementById('closePopup');
+
+        cardImage.addEventListener('click', function () {
+            imagePopup.style.display = 'block';
+            popupImage.src = this.src; // Set the image source in the popup
+        });
+
+        closePopup.addEventListener('click', function () {
+            imagePopup.style.display = 'none';
+        });
+
+    </script>
+</body>
+
+</html>
