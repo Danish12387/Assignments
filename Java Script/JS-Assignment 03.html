@@ -22,21 +22,20 @@
             addTodo(todos[i])
         }
 
-        button.addEventListener('click', function () {
-            addTodo()
-        })
-
         function addTodo(txt) {
             let div = document.createElement('div')
             div.className = 'todo-div'
 
             let todotxt = document.createElement('span')
             todotxt.className = 'todo-txt'
-            todotxt.innerHTML = txt ? txt : input.ariaValueMax
+            todotxt.innerHTML = txt ? txt : input.value
 
             let delBtn = document.createElement('button')
             delBtn.innerHTML = 'delete'
-            delBtn.onclick = function () { div.remove() }
+            delBtn.onclick = function () {
+                div.remove()
+                removeTodo(todotxt.innerHTML)
+            }
 
             div.appendChild(todotxt)
             div.appendChild(delBtn)
@@ -53,6 +52,17 @@
             localStorage.setItem('todos', JSON.stringify(todos))
         }
 
+        function removeTodo(txt){
+            let index = todos.indexOf(txt)
+            if(index > -1){
+                todos.splice(index, 1)
+                localStorage.setItem('todos', JSON.stringify(todos))
+            }
+        }
+
+        button.addEventListener('click', function () {
+            addTodo()
+        })
     </script>
 </body>
 
