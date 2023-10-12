@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Todo App</title>
+</head>
+
+<body>
+    <input type="text" id="input" placeholder="Add todo">
+    <button id="btn">Add</button>
+    <div id="container"></div>
+    <script>
+        let input = document.getElementById('input')
+        let button = document.getElementById('btn')
+        let cont = document.getElementById('container')
+
+        const todos = JSON.parse(localStorage.getItem('todos')) || []
+
+        for (let i = 0; i < todos.length; i++) {
+            addTodo(todos[i])
+        }
+
+        button.addEventListener('click', function () {
+            addTodo()
+        })
+
+        function addTodo(txt) {
+            let div = document.createElement('div')
+            div.className = 'todo-div'
+
+            let todotxt = document.createElement('span')
+            todotxt.className = 'todo-txt'
+            todotxt.innerHTML = txt ? txt : input.ariaValueMax
+
+            let delBtn = document.createElement('button')
+            delBtn.innerHTML = 'delete'
+            delBtn.onclick = function () { div.remove() }
+
+            div.appendChild(todotxt)
+            div.appendChild(delBtn)
+            cont.appendChild(div)
+
+            if (!txt) {
+                addTodoToStorage(input.value)
+                input.value = ''
+            }
+        }
+
+        function addTodoToStorage(txt) {
+            todos.push(txt)
+            localStorage.setItem('todos', JSON.stringify(todos))
+        }
+
+    </script>
+</body>
+
+</html>

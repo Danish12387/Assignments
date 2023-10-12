@@ -369,9 +369,11 @@ span{
     color: white;
     font-size: 16px;
     cursor: pointer;
+    position: relative;
+    z-index: 10;
 }
 .cards .cards-main button:hover{
-    background: transparent;
+    background: rgb(141, 198, 63, .7);
 }
 .cards .cards-main p{
     color: white;
