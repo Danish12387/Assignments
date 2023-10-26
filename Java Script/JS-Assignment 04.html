@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quiz</title>
+    <style>
+        .option-div{
+            display: block;
+            cursor: pointer;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="set-time-div">00:<span id="set-time">60</span></div>
+    <div id="que-container"></div>
+    <div id="result-container"></div>
+    <button id="next-btn" disabled>Next</button>
+    <script>
+        const Questions = [
+            {
+                que: 'What is the National sports of Pakistan?',
+                options: ['FootBall', 'Cricket', 'Hockey', 'BaseBall'],
+                correct: 'Hockey'
+            },
+            {
+                que: 'Who inaugurated the State Bank of Pakistan?',
+                options: ['Quaid-e-Azam', 'Malik Ghulam Muhammad', 'Liaquat Ali Khan', 'Allama Muhammad Iqba'],
+                correct: 'Quaid-e-Azam'
+            },
+            {
+                que: 'Sardar Abdur Rub Nishtar was the Governor of?',
+                options: ['Gilgit Baltistan', 'KPK', 'Punjab', 'Sindh'],
+                correct: 'Punjab'
+            },
+            {
+                que: 'National code of Pakistan is?',
+                options: ['PAK', 'PK', 'PAK 1', 'None of them'],
+                correct: 'PK'
+            },
+            {
+                que: 'Where is Warsak Dam of Pakistan situated?',
+                options: ['Khyber Pakhtunkhwa', 'Punjab', 'Sindh', 'Balochistan'],
+                correct: 'Khyber Pakhtunkhwa'
+            },
+            {
+                que: 'When was Liaquat Nehru Pact between India and Pakistan signed?',
+                options: ['1955', '1950', '1964', '1951'],
+                correct: '1950'
+            },
+            {
+                que: 'Who was the First woman Governor of State Bank of Pakistan?',
+                options: ['Noor Jahan', 'Dr Shamshad Akhter', 'Farzana Raja', 'Dr Ashraf Abbasi'],
+                correct: 'Dr Shamshad Akhter'
+            },
+            {
+                que: 'Mirpur is a famous city of?',
+                options: ['KPK', 'Punjab', 'Azad Kashmir', 'None of them'],
+                correct: 'Azad Kashmir'
+            },
+            {
+                que: 'Defence day is observed on ___________ ?',
+                options: ['6th September', '11th September', '7th September', 'FootBall'],
+                correct: '6th September'
+            },
+            {
+                que: 'The common value among the people of Pakistan is?',
+                options: ['Dress', 'Language', 'Habits', 'Islam'],
+                correct: 'Islam'
+            }
+        ]
+
+        const queContainer = document.getElementById('que-container')
+        const resultContainer = document.getElementById('result-container')
+        const nextBtn = document.getElementById('next-btn')
+        const setTimespan  = document.getElementById('set-time')
+        const setTimeDiv = document.getElementById('set-time-div')
+
+        let currentQuestion = 0
+        let rightAnswer = 0
+        let wrongAnswer = 0
+        let userAnswer = undefined
+        let span1 = 1
+        let Time = 60
+
+        function setTimeFunction(){
+            if(Time > 0){
+                Time--
+                setTimespan.innerHTML = Time
+            }else if(Time < 10){
+                setTimespan.innerHTML = '0' + Time
+            }
+            else{
+                Time = 60
+            }
+        }
+
+        function showQuestion() {
+            queContainer.innerHTML = null
+            let queDiv = document.createElement('div')
+            let h1 = document.createElement('h1')
+            h1.innerHTML = 'Q' + span1 + ': ' + Questions[currentQuestion].que
+            queDiv.appendChild(h1)
+            span1++
+            Time = 60
+
+            Questions[currentQuestion].options.map(data => {
+                let optionDiv = document.createElement('label')
+                optionDiv.className = 'option-div'
+                let input = document.createElement('input')
+                let span = document.createElement('span')
+                input.type = 'radio'
+                input.name = 'options'
+                input.value = data
+                span.innerHTML = data 
+                input.addEventListener('change', function(){
+                    console.log(this.value)
+                    userAnswer = this.value
+                    nextBtn.disabled = false
+                })
+                optionDiv.appendChild(input)
+                optionDiv.appendChild(span)
+                queDiv.appendChild(optionDiv)
+            })
+            queContainer.appendChild(queDiv)
+        }
+        const timeInterval = setInterval(setTimeFunction, 1000)
+        setInterval(checkAnswer, 60000)
+        showQuestion()
+
+        function checkAnswer(){
+            let correctAns = Questions[currentQuestion].correct
+
+            if(userAnswer === correctAns){
+                rightAnswer++
+            }else{
+                wrongAnswer++
+            }
+            
+            if(currentQuestion + 1 === Questions.length){
+                showResult()
+            }
+
+            if(currentQuestion + 1 < Questions.length){
+                currentQuestion++
+                showQuestion()
+                nextBtn.disabled = true
+            } 
+
+            if(currentQuestion === Questions.length - 1){
+                nextBtn.innerHTML = 'submit'
+            }
+        }
+
+        function showResult(){
+            clearInterval(timeInterval)
+            let resultDiv = document.createElement('div')
+            let h2 = document.createElement('h2')
+            let score = document.createElement('h2')
+            let rightH3 = document.createElement('h3')
+            let wrongH3 = document.createElement('h3')
+            h2.innerHTML = rightAnswer > wrongAnswer ? 'You Win' : 'You Lost'
+            score.innerHTML = 'Score: ' + rightAnswer *10
+            rightH3.innerHTML = 'Right Answers:' + rightAnswer
+            wrongH3.innerHTML = 'Wrong Answers:' + wrongAnswer
+            resultDiv.appendChild(h2)
+            resultDiv.appendChild(score)
+            resultDiv.appendChild(rightH3)
+            resultDiv.appendChild(wrongH3)
+            resultContainer.appendChild(resultDiv)
+
+            queContainer.style.display = 'none'
+            nextBtn.style.display = 'none'
+            setTimeDiv.style.display = 'none'
+        }
+        nextBtn.addEventListener('click', checkAnswer)
+    </script>
+</body>
+
+</html>
