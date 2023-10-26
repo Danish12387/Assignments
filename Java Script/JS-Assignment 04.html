@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Quiz</title>
     <style>
-        .option-div{
+        .option-div {
             display: block;
             cursor: pointer;
         }
@@ -75,7 +75,7 @@
         const queContainer = document.getElementById('que-container')
         const resultContainer = document.getElementById('result-container')
         const nextBtn = document.getElementById('next-btn')
-        const setTimespan  = document.getElementById('set-time')
+        const setTimespan = document.getElementById('set-time')
         const setTimeDiv = document.getElementById('set-time-div')
 
         let currentQuestion = 0
@@ -85,17 +85,14 @@
         let span1 = 1
         let Time = 60
 
-        function setTimeFunction(){
-            if(Time > 0){
+        function setTimeFunction() {
+            if (Time > 0) {
                 Time--
-                setTimespan.innerHTML = Time
-            }else if(Time < 10){
-                setTimespan.innerHTML = '0' + Time
-            }
-            else{
-                Time = 60
+                setTimespan.innerHTML = Time < 10 ? '0' + Time : Time
             }
         }
+
+        const timeInterval = setInterval(setTimeFunction, 1000)
 
         function showQuestion() {
             queContainer.innerHTML = null
@@ -114,8 +111,8 @@
                 input.type = 'radio'
                 input.name = 'options'
                 input.value = data
-                span.innerHTML = data 
-                input.addEventListener('change', function(){
+                span.innerHTML = data
+                input.addEventListener('change', function () {
                     console.log(this.value)
                     userAnswer = this.value
                     nextBtn.disabled = false
@@ -125,36 +122,36 @@
                 queDiv.appendChild(optionDiv)
             })
             queContainer.appendChild(queDiv)
+            setTimeout(checkAnswer, 60000)
         }
-        const timeInterval = setInterval(setTimeFunction, 1000)
-        setInterval(checkAnswer, 60000)
+
         showQuestion()
 
-        function checkAnswer(){
+        function checkAnswer() {
             let correctAns = Questions[currentQuestion].correct
 
-            if(userAnswer === correctAns){
+            if (userAnswer === correctAns) {
                 rightAnswer++
-            }else{
+            } else {
                 wrongAnswer++
             }
-            
-            if(currentQuestion + 1 === Questions.length){
+
+            if (currentQuestion + 1 === Questions.length) {
                 showResult()
             }
 
-            if(currentQuestion + 1 < Questions.length){
+            if (currentQuestion + 1 < Questions.length) {
                 currentQuestion++
                 showQuestion()
                 nextBtn.disabled = true
-            } 
+            }
 
-            if(currentQuestion === Questions.length - 1){
+            if (currentQuestion === Questions.length - 1) {
                 nextBtn.innerHTML = 'submit'
             }
         }
 
-        function showResult(){
+        function showResult() {
             clearInterval(timeInterval)
             let resultDiv = document.createElement('div')
             let h2 = document.createElement('h2')
@@ -162,7 +159,7 @@
             let rightH3 = document.createElement('h3')
             let wrongH3 = document.createElement('h3')
             h2.innerHTML = rightAnswer > wrongAnswer ? 'You Win' : 'You Lost'
-            score.innerHTML = 'Score: ' + rightAnswer *10
+            score.innerHTML = 'Score: ' + rightAnswer * 10
             rightH3.innerHTML = 'Right Answers:' + rightAnswer
             wrongH3.innerHTML = 'Wrong Answers:' + wrongAnswer
             resultDiv.appendChild(h2)
