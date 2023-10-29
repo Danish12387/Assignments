@@ -5,19 +5,28 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Quiz</title>
-    <style>
-        .option-div {
-            display: block;
-            cursor: pointer;
-        }
-    </style>
+    <link rel="stylesheet" href="JS-Assignment 04.css">
 </head>
 
 <body>
-    <div id="set-time-div">00:<span id="set-time">60</span></div>
-    <div id="que-container"></div>
-    <div id="result-container"></div>
-    <button id="next-btn" disabled>Next</button>
+    <div class="container">
+        <div id="set-time-div">
+            <div id="question-sent">
+                Question <span id="question-no"></span>: Select an Answer
+            </div>
+            <div>
+                <span id="set-time">30</span>
+            </div>
+        </div>
+        <div id="que-container"></div>
+        <div id="result-container"></div>
+        <div id="buttons">
+            <button id="back-btn" class="btns" disabled><span><i class="fa-solid fa-arrow-left"></i></span>
+                Previous</button>
+            <button id="next-btn" disabled class="btns">Next <span><i
+                        class="fa-solid fa-arrow-right"></i></span></button>
+        </div>
+    </div>
     <script>
         const Questions = [
             {
@@ -77,13 +86,16 @@
         const nextBtn = document.getElementById('next-btn')
         const setTimespan = document.getElementById('set-time')
         const setTimeDiv = document.getElementById('set-time-div')
+        const questionNo = document.getElementById('question-no')
+        const backBtn = document.getElementById('back-btn')
+        const buttons = document.getElementById('buttons')
 
         let currentQuestion = 0
         let rightAnswer = 0
         let wrongAnswer = 0
         let userAnswer = undefined
         let span1 = 1
-        let Time = 60
+        let Time = 30
 
         function setTimeFunction() {
             if (Time > 0) {
@@ -97,18 +109,21 @@
         function showQuestion() {
             queContainer.innerHTML = null
             let queDiv = document.createElement('div')
-            let h1 = document.createElement('h1')
-            h1.innerHTML = 'Q' + span1 + ': ' + Questions[currentQuestion].que
+            let h1 = document.createElement('h3')
+            h1.className = 'question-h3'
+            h1.innerHTML = Questions[currentQuestion].que
             queDiv.appendChild(h1)
-            span1++
-            Time = 60
+            questionNo.innerHTML = span1
+            Time = 30
 
             Questions[currentQuestion].options.map(data => {
                 let optionDiv = document.createElement('label')
                 optionDiv.className = 'option-div'
                 let input = document.createElement('input')
                 let span = document.createElement('span')
+                span.className = 'options-span'
                 input.type = 'radio'
+                input.style.backgroundColor = 'green'
                 input.name = 'options'
                 input.value = data
                 span.innerHTML = data
@@ -116,19 +131,53 @@
                     console.log(this.value)
                     userAnswer = this.value
                     nextBtn.disabled = false
+                    nextBtn.style.cursor = 'pointer'
+                    nextBtn.style.border = '1px solid #0ba6ff'
+                    nextBtn.style.color = '#0ba6ff'
                 })
                 optionDiv.appendChild(input)
                 optionDiv.appendChild(span)
                 queDiv.appendChild(optionDiv)
+
+
+                optionDiv.addEventListener('click', function () {
+
+                    optionDiv.style.color = '#0ba6ff'
+                    optionDiv.style.boxShadow = '0px 0px 5px 1px rgb(214, 214, 214)'
+                    optionDiv.style.transform = 'scale(1.03)'
+                    
+                    // if (optionDiv.style.color == 'black') {
+                    //     optionDiv.style.color = '#0ba6ff';
+                    //     optionDiv.style.boxShadow = '0px 0px 5px 1px rgb(212, 212, 212)';
+                    // }
+                    // else{
+                    //     optionDiv.style.color = 'black';
+                    //     optionDiv.style.boxShadow = '';
+                    // }
+                })
+
             })
             queContainer.appendChild(queDiv)
-            setTimeout(checkAnswer, 60000)
+
+            if (currentQuestion > 0) {
+                buttons.style.justifyContent = 'space-between'
+            }
+            else {
+                buttons.style.justifyContent = 'flex-end'
+            }
+            const timeOut = setTimeout(checkAnswer, 30000)
+
+            if (currentQuestion === 0) {
+                backBtn.disabled = true
+                backBtn.style.display = 'none'
+            }
         }
 
         showQuestion()
 
         function checkAnswer() {
             let correctAns = Questions[currentQuestion].correct
+            span1++
 
             if (userAnswer === correctAns) {
                 rightAnswer++
@@ -138,6 +187,7 @@
 
             if (currentQuestion + 1 === Questions.length) {
                 showResult()
+                clearInterval(timeInterval)
             }
 
             if (currentQuestion + 1 < Questions.length) {
@@ -149,19 +199,59 @@
             if (currentQuestion === Questions.length - 1) {
                 nextBtn.innerHTML = 'submit'
             }
+
+            if (currentQuestion == 0) {
+                buttons.style.justifyContent = 'flex-end'
+            }
+
+            if (currentQuestion > 0 && currentQuestion < Questions.length) {
+                backBtn.disabled = false
+                backBtn.style.display = 'block'
+                buttons.style.justifyContent = 'space-between'
+            }
+
+            nextBtn.style.cursor = 'not-allowed'
+            nextBtn.style.border = '1px solid grey'
+            nextBtn.style.color = 'grey'
         }
 
         function showResult() {
-            clearInterval(timeInterval)
             let resultDiv = document.createElement('div')
-            let h2 = document.createElement('h2')
+            resultDiv.className = 'result-div'
+
+            let resultHead = document.createElement('h2')
+            resultHead.className = 'result-head'
+            resultHead.innerHTML = 'Results'
+
+            let h2 = document.createElement('div')
+            h2.className = 'result-quote-div'
+
+            let quoteH2 = document.createElement('h2')
+            let quoteP = document.createElement('p')
+            quoteP.className = 'quote-p'
+
+
             let score = document.createElement('h2')
             let rightH3 = document.createElement('h3')
             let wrongH3 = document.createElement('h3')
-            h2.innerHTML = rightAnswer > wrongAnswer ? 'You Win' : 'You Lost'
-            score.innerHTML = 'Score: ' + rightAnswer * 10
-            rightH3.innerHTML = 'Right Answers:' + rightAnswer
-            wrongH3.innerHTML = 'Wrong Answers:' + wrongAnswer
+
+            if (rightAnswer > wrongAnswer) {
+                quoteH2.innerHTML = 'Congratulatons! You Win.'
+                quoteH2.style.color = 'green'
+                quoteP.innerHTML = "You've completed the quiz with a perfect score."
+            } else {
+                quoteH2.innerHTML = 'You Lost!'
+                quoteH2.style.color = 'red'
+                quoteP.innerHTML = "You've completed the quiz with a Lower score."
+            }
+
+            score.innerHTML = 'Score: ' + rightAnswer * 10 + ' /100'
+            rightH3.innerHTML = 'Right Answers: ' + rightAnswer
+            wrongH3.innerHTML = 'Wrong Answers: ' + wrongAnswer
+
+            h2.appendChild(quoteH2)
+            h2.appendChild(quoteP)
+            resultDiv.appendChild(resultHead)
             resultDiv.appendChild(h2)
             resultDiv.appendChild(score)
             resultDiv.appendChild(rightH3)
@@ -170,9 +260,46 @@
 
             queContainer.style.display = 'none'
             nextBtn.style.display = 'none'
+            backBtn.style.display = 'none'
             setTimeDiv.style.display = 'none'
+            currentQuestion++
         }
+
         nextBtn.addEventListener('click', checkAnswer)
+
+        backBtn.addEventListener('click', function () {
+            currentQuestion--
+            span1--
+            if (currentQuestion === 0) {
+                backBtn.disabled = true
+                backBtn.style.display = 'none'
+            }
+            // if (currentQuestion < Questions.length) {
+            //     backBtn.disabled = false
+            //     backBtn.style.display = 'block'
+            //     buttons.style.justifyContent = 'space-between'
+            // }
+            // if (currentQuestion >= 9) {
+            //     currentQuestion = 0
+            //     currentQuestion = 0
+            //     rightAnswer = 0
+            //     wrongAnswer = 0
+            //     userAnswer = undefined
+            //     span1 = 1
+            //     Time = 30
+
+            //     resultContainer.style.display = 'none'
+
+            //     queContainer.style.display = 'block'
+            //     nextBtn.style.display = 'block'
+            //     setTimeDiv.style.display = 'block'
+            //     backBtn.innerHTML = 'Previous'
+
+            // }
+
+            showQuestion()
+        }
+        )
     </script>
 </body>
 
