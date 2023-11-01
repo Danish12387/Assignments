@@ -1,0 +1,726 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Document</title>
+  <style>
+      * {
+font-family: sans-serif;
+}
+
+.main {
+display: flex;
+/* align-items: center; */
+/* justify-content: center; */
+
+}
+
+.side-bar {
+position: fixed;
+top: 90px;
+left: 0;
+bottom: 0;
+width: 300px;
+padding-top: 20px;
+border-right: 2px solid rgb(0, 181, 0);
+padding-left: 30px;
+box-shadow: 1px 1px 5px 1px rgb(202, 202, 202);
+z-index: 3;
+}
+
+.price-h2 {
+font-size: 24px !important;
+font-weight: bold;
+margin-top: 30px;
+}
+nav{
+height: 90px;
+display: flex;
+align-items: center;
+justify-content: space-between;
+padding-right: 33px;
+border-bottom: 2px solid rgb(0, 181, 0);
+position: sticky;
+top: 0;
+background-color: white;
+z-index: 2;
+box-shadow: 0px 1px 5px 1px rgb(180, 180, 180);
+width: 100%;
+padding-left: 33px;
+}
+nav input{
+cursor: text;
+}
+nav input[type=text] {
+width: 200px;
+transition: ease-in-out, width .35s ease-in-out;
+border-radius: 5px;
+height: 40px;
+border: 1px solid grey;
+padding-left: 10px;
+}
+
+nav input[type=text]:focus {
+width: 350px;
+outline: 1px solid rgb(0, 165, 0, .7);
+box-shadow: 2px 2px 5px 1px rgb(218, 218, 218);
+}
+nav #search-box-btn{
+height: 40px;
+border-radius: 5px;
+width: 100px;
+border: 1px solid rgb(0, 160, 0);
+color: rgb(0, 160, 0);
+background-color: white;
+transition: transform .3s ease-out, background-color .6s ease-in, color .2s ease-out;
+}
+nav #search-box-btn:hover{
+background-color: rgb(0, 181, 0);
+color: white;
+transform: scale(1.06);
+box-shadow: 2px 2px 5px 1px rgb(173, 173, 173);
+}
+
+h1 {
+color: rgb(1, 156, 1);
+font-size: 30px !important;
+cursor: pointer;
+}
+
+#productContainer {
+display: flex;
+flex-wrap: wrap;
+justify-content: space-around;
+margin-left: 300px;
+background-color: rgb(236, 236, 236);
+}
+
+.card {
+height: 520px;
+width: 300px;
+margin: 10px 10px;
+padding: 10px;
+cursor: pointer;
+transition: all .3s ease-out;
+}
+
+.card:hover {
+box-shadow: 3px 3px 5px 1px rgb(180, 180, 180);
+transform: scale(1.02);
+}
+
+.card-title {
+margin: 10px 0px;
+}
+
+.card-buttons{
+display: flex;
+justify-content: space-between;
+align-items: center;
+}
+.card-price{
+color: green;
+font-size: 20px;
+}
+
+#card-btn-1{
+width: 120px;
+height: 40px;
+border: 1px solid grey;
+background-color: white;
+border-radius: 5px;  
+border: 1px solid rgb(0, 160, 0);
+color: rgb(0, 160, 0);
+transition: all .3s ease-out;
+}
+#card-btn-1:hover{
+background-color: rgb(0, 181, 0);
+color: white;
+transform: scale(1.06);
+box-shadow: 2px 2px 5px 1px rgb(173, 173, 173);
+}
+#card-btn-2{
+width: 120px;
+height: 40px;
+border: none;
+border-radius: 5px;
+background-color: rgb(0, 181, 0);
+color: white;
+transition: all .3s ease-out;
+}
+#card-btn-2:hover{
+background-color: rgb(0, 138, 0);
+box-shadow: 2px 2px 5px 1px rgb(173, 173, 173);
+transform: scale(1.06);
+}
+
+.imge {
+width: 210px;
+background-color: aliceblue;
+margin: auto;
+}
+
+.card-img {
+height: 250px;
+width: 210px;
+}
+
+h2,
+h6,
+p {
+margin: 0px;
+padding: 0px;
+}
+
+h6 {
+font-weight: bold;
+}
+
+h2 {
+font-size: 20px !important;
+}
+
+label {
+cursor: pointer;
+display: flex;
+margin: 0px 5px;
+font-weight: bold;
+font-size: 16px;
+}
+input{
+cursor: pointer;
+}
+input[type=radio] {
+appearance: none;
+padding: 7px;
+border-radius:50%;
+border: 1px solid black;
+}
+input[type=radio]:checked {
+border: 1px solid rgb(0, 104, 0);
+background-color: rgb(0, 181, 0);
+}
+.show-price{
+height: 25px;
+}
+.category{
+display: flex;
+flex-direction: column;
+}
+.category label{
+margin-top: 10px ;
+}
+
+#body-before{
+position: fixed;
+top: 0;
+left: 0;
+bottom: 0;
+height: 100%;
+width: 100%;
+background-color: rgb(7, 7, 7, .2);
+display: none;
+z-index: 4;
+}
+.popup {
+display: none;
+position: fixed;
+top: 50%;
+left: 50%;
+transform: translate(-50%, -50%);
+background-color: white;
+padding: 20px;
+z-index: 10;
+box-shadow: 0px 0px 10px 10px rgba(0, 0, 0, 0.2);
+text-align: center;
+width: 400px;
+border-radius: 5px;
+}
+
+.popup-img {
+max-width: 400px;
+max-height: 500px;
+margin-bottom: 10px;
+}
+.popup-div{
+display: flex;
+flex-direction: column;
+}
+
+#closePopup {
+background-color: white;
+color: black;
+border: 1px solid black;
+padding: 10px 20px;
+cursor: pointer;
+font-size: 16px;
+border-radius: 5px;
+transition: all .3s ease-out;
+}
+#closePopup:hover{
+background-color: rgb(224, 0, 0);
+border: 1px solid rgb(224, 0, 0);
+color: white;
+}
+
+  </style>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous" />
+</head>
+
+<body>
+  <nav>
+    <h1>Products</h1>
+    <div class="search-box">
+      <form id="form">
+        <input type="text" placeholder="Type something" id="search-input">
+        <button id="search-box-btn">Search</button>
+      </form>
+    </div>
+  </nav>
+  <div class="main">
+    <div class="side-bar">
+
+      <div class="price">
+        <h2 class="price-h2">Price</h2>
+        <label><input type="range" min="0" max="999" value="0" id="range-input" />
+          <div class="show-price"><span id="show-price">0</span>$</div>
+        </label>
+      </div>
+
+      <div class="rating">
+        <h2 class="price-h2">Rating</h2>
+        <label><input type="radio" name="sort" value="all" checked /> All</label>
+        <label><input type="radio" name="sort" value="3" /> Above 3</label>
+        <label><input type="radio" name="sort" value="4" /> Above 4</label>
+      </div>
+
+      <div class="sort">
+        <h2 class="price-h2">Sort By</h2>
+        <label> <input type="radio" name="sort-price" value="high" /> H To L</label>
+        <label><input type="radio" name="sort-price" value="low" /> L To H</label>
+      </div>
+
+      <div class="category">
+        <h2 class="price-h2">Categories</h2>
+        <label> <input type="radio" name="category" value="electronics" /> Electronics</label>
+        <label> <input type="radio" name="category" value="jewelery" /> Jewelery</label>
+        <label><input type="radio" name="category" value="womenClothing" /> Women's Clothing</label>
+        <label><input type="radio" name="category" value="menClothing" /> Men's Clothing</label>
+      </div>
+    </div>
+
+    <div id="body-before"></div>
+
+    <div id="productContainer"></div>
+
+    <div id="popup" class="popup">
+
+      <div class="popup-div">
+        <img id="popupImg" class="popup-img" src="" alt="Popup Image">
+        <button id="closePopup">Close</button>
+      </div>
+
+    </div>
+
+  </div>
+
+  <script>
+    const products = [
+  {
+    id: 1,
+    title: 'Fjallraven - Foldsack No. 1 Backpack, Fits 15 Laptops',
+    price: 109.95,
+    description:
+      'Your perfect pack for everyday use and walks in the forest. Stash your laptop (up to 15 inches) in the padded sleeve, your everyday',
+    category: "Men's Clothing",
+    image: 'https://fakestoreapi.com/img/81fPKd-2AYL._AC_SL1500_.jpg',
+    rating: { rate: 3.9, count: 120 }
+  },
+  {
+    id: 2,
+    title: 'Mens Casual Premium Slim Fit T-Shirts ',
+    price: 22.3,
+    description:
+      'Slim-fitting style, contrast raglan long sleeve, three-button henley placket, light weight & soft fabric for breathable and comfortable wearing. And Solid stitched shirts with round neck made for durability and a great fit for casual fashion wear and diehard baseball fans. The Henley style round neckline includes a three-button placket.',
+    category: "Men's Clothing",
+    image:
+      'https://fakestoreapi.com/img/71-3HjGNDUL._AC_SY879._SX._UX._SY._UY_.jpg',
+    rating: { rate: 4.1, count: 259 }
+  },
+  {
+    id: 3,
+    title: 'Mens Cotton Jacket',
+    price: 55.99,
+    description:
+      'great outerwear jackets for Spring/Autumn/Winter, suitable for many occasions, such as working, hiking, camping, mountain/rock climbing, cycling, traveling or other outdoors. Good gift choice for you or your family member. A warm hearted love to Father, husband or son in this thanksgiving or Christmas Day.',
+    category: "Men's Clothing",
+    image: 'https://fakestoreapi.com/img/71li-ujtlUL._AC_UX679_.jpg',
+    rating: { rate: 4.7, count: 500 }
+  },
+  {
+    id: 4,
+    title: 'Mens Casual Slim Fit',
+    price: 15.99,
+    description:
+      'The color could be slightly different between on the screen and in practice. / Please note that body builds vary by person, therefore, detailed size information should be reviewed below on the product description.',
+    category: "Men's Clothing",
+    image: 'https://fakestoreapi.com/img/71YXzeOuslL._AC_UY879_.jpg',
+    rating: { rate: 2.1, count: 430 }
+  },
+  {
+    id: 5,
+    title:
+      "John Hardy Women's Legends Naga Gold & Silver Dragon Station Chain Bracelet",
+    price: 695,
+    description:
+      "From our Legends Collection, the Naga was inspired by the mythical water dragon that protects the ocean's pearl. Wear facing inward to be bestowed with love and abundance, or outward for protection.",
+    category: 'Jewelery',
+    image: 'https://fakestoreapi.com/img/71pWzhdJNwL._AC_UL640_QL65_ML3_.jpg',
+    rating: { rate: 4.6, count: 400 }
+  },
+  {
+    id: 6,
+    title: 'Solid Gold Petite Micropave ',
+    price: 168,
+    description:
+      'Satisfaction Guaranteed. Return or exchange any order within 30 days.Designed and sold by Hafeez Center in the United States. Satisfaction Guaranteed. Return or exchange any order within 30 days.',
+    category: 'Jewelery',
+    image: 'https://fakestoreapi.com/img/61sbMiUnoGL._AC_UL640_QL65_ML3_.jpg',
+    rating: { rate: 3.9, count: 70 }
+  },
+  {
+    id: 7,
+    title: 'White Gold Plated Princess',
+    price: 9.99,
+    description:
+      "Classic Created Wedding Engagement Solitaire Diamond Promise Ring for Her. Gifts to spoil your love more for Engagement, Wedding, Anniversary, Valentine's Day...",
+    category: 'Jewelery',
+    image: 'https://fakestoreapi.com/img/71YAIFU48IL._AC_UL640_QL65_ML3_.jpg',
+    rating: { rate: 3, count: 400 }
+  },
+  {
+    id: 8,
+    title: 'Pierced Owl Rose Gold Plated Stainless Steel Double',
+    price: 10.99,
+    description:
+      'Rose Gold Plated Double Flared Tunnel Plug Earrings. Made of 316L Stainless Steel',
+    category: 'Jewelery',
+    image: 'https://fakestoreapi.com/img/51UDEzMJVpL._AC_UL640_QL65_ML3_.jpg',
+    rating: { rate: 1.9, count: 100 }
+  },
+  {
+    id: 9,
+    title: 'WD 2TB Elements Portable External Hard Drive - USB 3.0 ',
+    price: 64,
+    description:
+      'USB 3.0 and USB 2.0 Compatibility Fast data transfers Improve PC Performance High Capacity; Compatibility Formatted NTFS for Windows 10, Windows 8.1, Windows 7; Reformatting may be required for other operating systems; Compatibility may vary depending on user’s hardware configuration and operating system',
+    category: 'Electronics',
+    image: 'https://fakestoreapi.com/img/61IBBVJvSDL._AC_SY879_.jpg',
+    rating: { rate: 3.3, count: 203 }
+  },
+  {
+    id: 10,
+    title: 'SanDisk SSD PLUS 1TB Internal SSD - SATA III 6 Gb/s',
+    price: 109,
+    description:
+      'Easy upgrade for faster boot up, shutdown, application load and response (As compared to 5400 RPM SATA 2.5” hard drive; Based on published specifications and internal benchmarking tests using PCMark vantage scores) Boosts burst write performance, making it ideal for typical PC workloads The perfect balance of performance and reliability Read/write speeds of up to 535MB/s/450MB/s (Based on internal testing; Performance may vary depending upon drive capacity, host device, OS and application.)',
+    category: 'Electronics',
+    image: 'https://fakestoreapi.com/img/61U7T1koQqL._AC_SX679_.jpg',
+    rating: { rate: 2.9, count: 470 }
+  },
+  {
+    id: 11,
+    title:
+      'Silicon Power 256GB SSD 3D NAND A55 SLC Cache Performance Boost SATA III 2.5',
+    price: 109,
+    description:
+      '3D NAND flash are applied to deliver high transfer speeds Remarkable transfer speeds that enable faster bootup and improved overall system performance. The advanced SLC Cache Technology allows performance boost and longer lifespan 7mm slim design suitable for Ultrabooks and Ultra-slim notebooks. Supports TRIM command, Garbage Collection technology, RAID, and ECC (Error Checking & Correction) to provide the optimized performance and enhanced reliability.',
+    category: 'Electronics',
+    image: 'https://fakestoreapi.com/img/71kWymZ+c+L._AC_SX679_.jpg',
+    rating: { rate: 4.8, count: 319 }
+  },
+  {
+    id: 12,
+    title:
+      'WD 4TB Gaming Drive Works with Playstation 4 Portable External Hard Drive',
+    price: 114,
+    description:
+      "Expand your PS4 gaming experience, Play anywhere Fast and easy, setup Sleek design with high capacity, 3-year manufacturer's limited warranty",
+    category: 'Electronics',
+    image: 'https://fakestoreapi.com/img/61mtL65D4cL._AC_SX679_.jpg',
+    rating: { rate: 4.8, count: 400 }
+  },
+  {
+    id: 13,
+    title: 'Acer SB220Q bi 21.5 inches Full HD (1920 x 1080) IPS Ultra-Thin',
+    price: 599,
+    description:
+      '21. 5 inches Full HD (1920 x 1080) widescreen IPS display And Radeon free Sync technology. No compatibility for VESA Mount Refresh Rate: 75Hz - Using HDMI port Zero-frame design | ultra-thin | 4ms response time | IPS panel Aspect ratio - 16: 9. Color Supported - 16. 7 million colors. Brightness - 250 nit Tilt angle -5 degree to 15 degree. Horizontal viewing angle-178 degree. Vertical viewing angle-178 degree 75 hertz',
+    category: 'Electronics',
+    image: 'https://fakestoreapi.com/img/81QpkIctqPL._AC_SX679_.jpg',
+    rating: { rate: 2.9, count: 250 }
+  },
+  {
+    id: 14,
+    title:
+      'Samsung 49-Inch CHG90 144Hz Curved Gaming Monitor (LC49HG90DMNXZA) – Super Ultrawide Screen QLED ',
+    price: 999.99,
+    description:
+      '49 INCH SUPER ULTRAWIDE 32:9 CURVED GAMING MONITOR with dual 27 inch screen side by side QUANTUM DOT (QLED) TECHNOLOGY, HDR support and factory calibration provides stunningly realistic and accurate color and contrast 144HZ HIGH REFRESH RATE and 1ms ultra fast response time work to eliminate motion blur, ghosting, and reduce input lag',
+    category: 'Electronics',
+    image: 'https://fakestoreapi.com/img/81Zt42ioCgL._AC_SX679_.jpg',
+    rating: { rate: 2.2, count: 140 }
+  },
+  {
+    id: 15,
+    title: "BIYLACLESEN Women's 3-in-1 Snowboard Jacket Winter Coats",
+    price: 56.99,
+    description:
+      'Note:The Jackets is US standard size, Please choose size as your usual wear Material: 100% Polyester; Detachable Liner Fabric: Warm Fleece. Detachable Functional Liner: Skin Friendly, Lightweigt and Warm.Stand Collar Liner jacket, keep you warm in cold weather. Zippered Pockets: 2 Zippered Hand Pockets, 2 Zippered Pockets on Chest (enough to keep cards or keys)and 1 Hidden Pocket Inside.Zippered Hand Pockets and Hidden Pocket keep your things secure. Humanized Design: Adjustable and Detachable Hood and Adjustable cuff to prevent the wind and water,for a comfortable fit. 3 in 1 Detachable Design provide more convenience, you can separate the coat and inner as needed, or wear it together. It is suitable for different season and help you adapt to different climates',
+    category: "Women's Clothing",
+    image: 'https://fakestoreapi.com/img/51Y5NI-I5jL._AC_UX679_.jpg',
+    rating: { rate: 2.6, count: 235 }
+  },
+  {
+    id: 16,
+    title:
+      "Lock and Love Women's Removable Hooded Faux Leather Moto Biker Jacket",
+    price: 29.95,
+    description:
+      '100% POLYURETHANE(shell) 100% POLYESTER(lining) 75% POLYESTER 25% COTTON (SWEATER), Faux leather material for style and comfort / 2 pockets of front, 2-For-One Hooded denim style faux leather jacket, Button detail on waist / Detail stitching at sides, HAND WASH ONLY / DO NOT BLEACH / LINE DRY / DO NOT IRON',
+    category: "Women's Clothing",
+    image: 'https://fakestoreapi.com/img/81XH0e8fefL._AC_UY879_.jpg',
+    rating: { rate: 2.9, count: 340 }
+  },
+  {
+    id: 17,
+    title: 'Rain Jacket Women Windbreaker Striped Climbing Raincoats',
+    price: 39.99,
+    description:
+      "Lightweight perfet for trip or casual wear---Long sleeve with hooded, adjustable drawstring waist design. Button and zipper front closure raincoat, fully stripes Lined and The Raincoat has 2 side pockets are a good size to hold all kinds of things, it covers the hips, and the hood is generous but doesn't overdo it.Attached Cotton Lined Hood with Adjustable Drawstrings give it a real styled look.",
+    category: "Women's Clothing",
+    image: 'https://fakestoreapi.com/img/71HblAHs5xL._AC_UY879_-2.jpg',
+    rating: { rate: 3.8, count: 679 }
+  },
+  {
+    id: 18,
+    title: "MBJ Women's Solid Short Sleeve Boat Neck V ",
+    price: 9.85,
+    description:
+      '95% RAYON 5% SPANDEX, Made in USA or Imported, Do Not Bleach, Lightweight fabric with great stretch for comfort, Ribbed on sleeves and neckline / Double stitching on bottom hem',
+    category: "Women's Clothing",
+    image: 'https://fakestoreapi.com/img/71z3kpMAYsL._AC_UY879_.jpg',
+    rating: { rate: 4.7, count: 130 }
+  },
+  {
+    id: 19,
+    title: "Opna Women's Short Sleeve Moisture",
+    price: 7.95,
+    description:
+      '100% Polyester, Machine wash, 100% cationic polyester interlock, Machine Wash & Pre Shrunk for a Great Fit, Lightweight, roomy and highly breathable with moisture wicking fabric which helps to keep moisture away, Soft Lightweight Fabric with comfortable V-neck collar and a slimmer fit, delivers a sleek, more feminine silhouette and Added Comfort',
+    category: "Women's Clothing",
+    image: 'https://fakestoreapi.com/img/51eg55uWmdL._AC_UX679_.jpg',
+    rating: { rate: 4.5, count: 146 }
+  },
+  {
+    id: 20,
+    title: 'DANVOUY Womens T Shirt Casual Cotton Short',
+    price: 12.99,
+    description:
+      '95%Cotton,5%Spandex, Features: Casual, Short Sleeve, Letter Print,V-Neck,Fashion Tees, The fabric is soft and has some stretch., Occasion: Casual/Office/Beach/School/Home/Street. Season: Spring,Summer,Autumn,Winter.',
+    category: "Women's Clothing",
+    image: 'https://fakestoreapi.com/img/61pHAEJ4NML._AC_UX679_.jpg',
+    rating: { rate: 3.6, count: 145 }
+  }
+]
+
+const showPrice = document.getElementById('show-price')
+const searchBoxBtn = document.getElementById('search-box-btn')
+const searchInput = document.getElementById('search-input')
+const form = document.getElementById('form')
+const popup = document.getElementById('popup');
+const popupImg = document.getElementById('popupImg');
+const closePopup = document.getElementById('closePopup');
+const body = document.body
+
+
+function displayAll() {
+  const productContainer = document.getElementById('productContainer')
+  productContainer.innerHTML = null
+  products.forEach((data, ind) => {
+    const card = `<div id =${data.id} class = 'card'>
+    <div class='imge'><img src = ${data.image} class = 'card-img'></div>
+    <h2 class = 'card-title'>${data.title}</h2>
+    <h6 class = 'card-category'>${data.category}</h6>
+    <h6 class = 'card-price'>Price : ${data.price}$</h6>
+    <p class = 'card-rating'>Rating: ${data.rating.rate} (${data.rating.count})</p>
+    <div class="card-buttons">
+    <button class="card-btn-1"  id="card-btn-1">Add to Cart</button>
+    <button class="card-btn" id="card-btn-2">Buy</button>
+    </div>
+    </div>`
+
+    productContainer.innerHTML += card
+    const bodyBefore = document.getElementById('body-before')
+    const cards = document.getElementsByClassName('card');
+
+
+    for (let i = 0; i < cards.length; i++) {
+      cards[i].addEventListener('click', function () {
+
+        const imageSource = products[i].image;
+
+        popupImg.src = imageSource;
+
+        popup.style.display = 'block';
+        bodyBefore.style.display = 'block'
+        body.style.overflow = 'hidden'
+        productContainer.style.paddingRight = '17px'
+
+      });
+    }
+
+    closePopup.addEventListener('click', function () {
+      popup.style.display = 'none';
+      bodyBefore.style.display = 'none'
+      body.style.overflow = 'scroll'
+      productContainer.style.paddingRight = '0px'
+    });
+
+  })
+}
+
+displayAll()
+
+document.getElementsByName('sort').forEach(input => {
+  input.addEventListener('change', filterAccordingToRating)
+})
+
+document.getElementsByName('sort-price').forEach(input => {
+  input.addEventListener('change', filterAccordingToPrice)
+})
+
+document.getElementsByName('category').forEach(input => {
+  input.addEventListener('change', filterAccordingToCategory)
+})
+
+document.getElementById('range-input').addEventListener('change', filterByPriceRange)
+
+
+function filterAccordingToRating() {
+  console.log(this.value)
+
+  if (this.value == 'all') {
+    displayAll()
+  }
+  if (this.value == '3') {
+    const above3 = products.filter(data => data.rating.rate > 3)
+    displayProducts(above3)
+  }
+  if (this.value == '4') {
+    const above4 = products.filter(data => data.rating.rate > 4)
+    displayProducts(above4)
+  }
+}
+
+function filterAccordingToPrice() {
+  if (this.value == 'high') {
+    const sorted = products.sort((a, b) => b.price - a.price)
+    displayProducts(sorted)
+  }
+  if (this.value == 'low') {
+    const sorted = products.sort((a, b) => a.price - b.price)
+    displayProducts(sorted)
+  }
+}
+
+function filterAccordingToCategory(){
+  if (this.value == 'electronics'){
+    const categorized = products.filter(data=> data.category == 'Electronics')
+    displayProducts(categorized)
+  }
+  if (this.value == 'jewelery'){
+    const categorized = products.filter(data=> data.category == 'Jewelery')
+    displayProducts(categorized)
+  }
+  if (this.value == 'menClothing'){
+    const categorized = products.filter(data=> data.category == "Men's Clothing")
+    displayProducts(categorized)
+  }
+  if (this.value == 'womenClothing'){
+    const categorized = products.filter(data=> data.category == "Women's Clothing")
+    displayProducts(categorized)
+  }
+}
+
+function filterByPriceRange() {
+  console.log(this.value)
+  const filtered = products.filter(data => data.price >= this.value)
+  displayProducts(filtered)
+  showPrice.innerHTML = this.value
+}
+
+function displayProducts(prod) {
+  productContainer.innerHTML = null
+  prod.forEach((data, ind) => {
+    const card = `<div id =${data.id} class = 'card'>
+    <div class='imge'><img src = ${data.image} class = 'card-img'></div>
+    <h2 class = 'card-title'>${data.title}</h2>
+    <h6 class = 'card-category'>${data.category}</h6>
+    <h6 class = 'card-price'>Price : ${data.price}$</h6>
+    <p class = 'card-rating'>Rating: ${data.rating.rate} (${data.rating.count})</p>
+    <div class="card-buttons">
+    <button id="card-btn-1">Add to Cart</button>
+    <button id="card-btn-2">Buy</button>
+    </div>
+    </div>`
+
+    productContainer.innerHTML += card
+    const cards = document.getElementsByClassName('card');
+    const bodyBefore = document.getElementById('body-before')
+
+    for (let i = 0; i < cards.length; i++) {
+      cards[i].addEventListener('click', function () {
+
+        const imageSource = prod[i].image;
+
+        popupImg.src = imageSource;
+
+        popup.style.display = 'block';
+        bodyBefore.style.display = 'block'
+        body.style.overflow = 'hidden'
+        productContainer.style.paddingRight = '17px'
+
+      });
+    }
+
+    closePopup.addEventListener('click', function () {
+      popup.style.display = 'none';
+      bodyBefore.style.display = 'none'
+      body.style.overflow = 'scroll'
+      productContainer.style.paddingRight = '0px'
+    });
+  })
+}
+
+function search() {
+  const lowerInput = searchInput.value.toLowerCase()
+  const lowerData = products.filter((data) => data.title.toLowerCase().includes(lowerInput))
+  displayProducts(lowerData)
+}
+
+form.addEventListener('submit', (e) => {
+  e.preventDefault()
+  search()
+})
+
+searchBoxBtn.addEventListener('click', search)
+
+  </script>
+</body>
+
+</html>

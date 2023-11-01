@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .popup {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: white;
+            padding: 20px;
+            z-index: 1;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+            text-align: center;
+        }
+
+        .popup-img {
+            max-width: 80%;
+            max-height: 80%;
+            margin-bottom: 10px;
+        }
+
+        #closePopup {
+            background-color: red;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="popup" class="popup">
+        <img id="popupImg" class="popup-img" src="" alt="Popup Image">
+        <button id="closePopup">Close</button>
+    </div>
+    <script>
+        const cards = document.getElementsByClassName('card');
+        const popup = document.getElementById('popup');
+        const popupImg = document.getElementById('popupImg');
+        const closePopup = document.getElementById('closePopup');
+
+        for (let i = 0; i < cards.length; i++) {
+            cards[i].addEventListener('click', function () {
+                // Replace 'your-image-source.jpg' with the actual image source for this card.
+                const imageSource = 'your-image-source.jpg';
+
+                // Set the popup image source.
+                popupImg.src = imageSource;
+
+                // Show the popup.
+                popup.style.display = 'block';
+            });
+        }
+
+        closePopup.addEventListener('click', function () {
+            // Close the popup when the "Close" button is clicked.
+            popup.style.display = 'none';
+        });
+
+        // Get the popup, popup image, and close button elements
+        const popup1 = document.getElementById('popup');
+        const popupImg1 = document.getElementById('popupImg');
+        const closePopup1 = document.getElementById('closePopup');
+
+        // Get all card elements
+        const cards1 = document.getElementsByClassName('card');
+
+        // Add a click event listener to each card
+        for (let i = 0; i < cards.length; i++) {
+            cards[i].addEventListener('click', function () {
+                // Find the image source associated with the clicked card
+                const imageSource = products[i].image;
+
+                // Set the popup image source
+                popupImg.src = imageSource;
+
+                // Show the popup
+                popup.style.display = 'block';
+            });
+        }
+
+        // Add a click event listener to the close button in the popup
+        closePopup.addEventListener('click', function () {
+            // Close the popup when the "Close" button is clicked
+            popup.style.display = 'none';
+        });
+
+    </script>
+    const popup = document.getElementById('popup');
+    const popupImg = document.getElementById('popupImg');
+    const closePopup = document.getElementById('closePopup');
+    const background = document.getElementById('background');
+    
+    // Function to show the popup
+    function showPopup(imageSource) {
+      popupImg.src = imageSource;
+      popup.style.display = 'block';
+      background.classList.add('blur-background'); // Apply the blur class
+    }
+    
+    // Function to close the popup
+    function closePopupHandler() {
+      popup.style.display = 'none';
+      background.classList.remove('blur-background'); // Remove the blur class
+    }
+    
+    // Add click event listeners
+    for (let i = 0; i < cards.length; i++) {
+      cards[i].addEventListener('click', function () {
+        const imageSource = products[i].image;
+        showPopup(imageSource);
+      });
+    }
+    
+    closePopup.addEventListener('click', closePopupHandler);
+    
+</body>
+
+</html>
