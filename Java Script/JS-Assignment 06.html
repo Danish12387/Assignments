@@ -18,7 +18,7 @@
             <button id="btn">Search</button>
         </form>
     </nav>
-    <h1 style="text-align: center;">Search for weather</h1>
+    <h1 style="text-align: center;" id="head">Search for weather</h1>
     <div id="weather-info"></div>
 
     <script>
@@ -27,16 +27,19 @@
         const input = document.getElementById('input')
         const form = document.getElementById('form')
         const dataDiv = document.getElementById('data')
+        const head = document.getElementById('head')
 
         function getWeatherData() {
+            head.style.display = 'none'
             const location = input.value
 
             fetch(`https://api.weatherapi.com/v1/current.json?key=3b90744069da4e9fa8853358230111&q=${location}&aqi=no`).then(response => response.json())
                 .then(data => {
                     const weather = `<div id="weather-box">
                         <div class="upper-box">
-                        <div class="row"><h2>${data?.location?.name}</h2></div>
-                        <div class="row"><img src="${data?.current?.condition?.icon}"></div>
+                        <div><h2>${data?.location?.name}</h2></div>
+                        <div style="font-size: 15px"><p>${dataDiv.innerHTML}</p></div>
+                        <div><img src="${data?.current?.condition?.icon}"></div>
                         <div class="temp"><p>${data?.current?.temp_c}<sup>o</sup>C</p></div>
                         <div class="text"><h2>${data?.current?.condition?.text}</h2></div>
                         </div>
@@ -54,7 +57,32 @@
                         </div>
                 </div>`
                     weatherInfo.innerHTML = weather
-                    dataDiv.innerHTML = data.location.localtime
+                    const inputDate = new Date(data.location.localtime);
+
+                    const days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+                    const months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+
+                    const dayName = days[inputDate.getDay()];
+                    const monthName = months[inputDate.getMonth()];
+                    let hours = inputDate.getHours();
+                    const minutes = inputDate.getMinutes();
+
+                    const amPm = hours >= 12 ? 'PM' : 'AM';
+
+                    if (hours > 12) {
+                        hours -= 12;
+                    }
+
+                    if (hours === 0) {
+                        hours = 12;
+                    }
+
+                    const formattedHours = String(hours).padStart(2, '0');
+                    const formattedMinutes = String(minutes).padStart(2, '0');
+
+                    const formattedDateString = `${dayName} ${formattedHours}:${formattedMinutes} ${amPm}`;
+
+                    dataDiv.innerHTML = formattedDateString
                 })
                 .catch(err => {
                     weatherInfo.innerHTML = `Error: ${err.message}`
