@@ -17,40 +17,49 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            background: linear-gradient(45deg, #0a0a0a, #3a4452);
+            background: linear-gradient(330deg,rgba(139, 199, 255, 0.28)0%, #a7d4ff 80%);
         }
         .calculator{
-            border: 1px solid #717377;
+            /* border: 1px solid #717377; */
             padding: 20px;
-            border-radius: 20px;
-            background: transparent;
-            animation: anime 2s ease infinite;
+            border-radius: 30px;
+            background: linear-gradient(330deg, #90c9ff 40%, rgba(255, 255, 255, 0.842) 100%);
+            width: 350px;
+            height: 90%;
+            animation: anime 2s ease-in-out infinite;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            align-items: center;
         }
         input{
+            height: 230px;
             width: 330px;
             border: none;
             padding: 24px;
             margin: 10px 0px;
             background: transparent;
-            box-shadow: 0px 0px 5px rgba(84, 84, 84, .3);
+            /* box-shadow: 0px 0px 5px rgba(84, 84, 84, .3); */
             font-size: 40px;
             text-align: right;
             cursor: pointer;
-            color: #ffffff;
+            color: rgb(0, 0, 0);
+            font-weight: 600;
         }
-        input::placeholder{
+        /* input::placeholder{
             color: #ffffff;
-        }
+        } */
         button{
-            width: 60px;
-            height: 60px;
+            width: 50px;
+            height: 50px;
             margin: 10px;
-            border-radius: 50%;
-            background: transparent;
+            border-radius: 15px;
+            background: linear-gradient(130deg, rgba(255, 255, 255, 0.60) 0%, rgba(255, 255, 255, 0.40) 100%);
             color: #ffffff;
             border: none;
             box-shadow: 1px 1px 5px rgba(255, 255, 255, .4);
-            font-size: 20px;
+            font-size: 24px;
+            font-weight: 600;
             cursor: pointer;
             transition: transform .2s ease-in-out;
         }
@@ -58,14 +67,14 @@
             transform: translateY(-4px) scale(1.05);
         }
         .EqualBtn{
-            background-color: #fb7c14;
+            background-color: #008ff5;
         }
         .operator{
-            color: #6dee0a;
+            color: #109DFF;
         }
         @keyframes anime{
             0%{
-                box-shadow: 0px 3px 15px rgba(113, 115, 119, 0.2);
+                box-shadow: 0px 3px 15px rgba(113, 115, 119, .2);
             }
             10%{
                 box-shadow: 0px 3px 15px rgba(113, 115, 119, .4);
@@ -104,8 +113,8 @@
     <div class="calculator">
         <input type="text" placeholder="0" id="inputbox">
         <div>
-            <button class="operator">AC</button>
-            <button class="operator">DEL</button>
+            <button class="operator">Ac</button>
+            <button class="operator">Del</button>
             <button class="operator">%</button>
             <button class="operator">/</button>
         </div>
@@ -128,8 +137,7 @@
             <button class="operator">+</button>
         </div>
         <div>
-            <button>00</button>
-            <button>0</button>
+            <button style="width: 125px;">0</button>
             <button>.</button>
             <button class="EqualBtn">=</button>
         </div>
@@ -145,11 +153,11 @@
                     string = eval(string)
                     input.value = string
                 }
-                else if(e.target.innerHTML == 'AC'){
+                else if(e.target.innerHTML == 'Ac'){
                     string = ''
                     input.value = string
                 }
-                else if(e.target.innerHTML == "DEL"){
+                else if(e.target.innerHTML == "Del"){
                     string = string.substring(0, string.length-1)
                     input.value = string
                 }
@@ -161,4 +169,3 @@
         })
     </script>
 </body>
-</html>
