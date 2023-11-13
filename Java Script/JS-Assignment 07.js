@@ -1,5 +1,6 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.5.2/firebase-app.js";
-import { getAuth, createUserWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/10.5.2/firebase-auth.js";
+import { getDatabase, set, ref, update } from "https://www.gstatic.com/firebasejs/10.5.2/firebase-database.js";
+import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.5.2/firebase-auth.js";
 import { getAnalytics } from "https://www.gstatic.com/firebasejs/10.5.2/firebase-analytics.js";
 
 const firebaseConfig = {
@@ -13,59 +14,122 @@ const firebaseConfig = {
 };
 
 const app = initializeApp(firebaseConfig);
+const database = getDatabase(app)
 const analytics = getAnalytics(app);
 const auth = getAuth(app)
 
 const form1 = document.getElementById('form-1')
+const userName = document.getElementById('userName')
 const form2 = document.getElementById('form-2')
+const signUpPage = document.getElementById('sign-up-page')
+const loginPage = document.getElementById('login-page')
+const dashboard = document.getElementById('dashboard')
 
-form1.addEventListener('submit', (e)=>{
+form1.addEventListener('submit', (e) => {
     e.preventDefault()
-    const userInfo = {
-        name: e.target[0].value,
-        email: e.target[1].value,
-        password: e.target[3].value
+
+    let userInfo = {}
+
+    if (e.target[2].value == e.target[3].value) {
+
+        userInfo.name = e.target[0].value
+        userInfo.email = e.target[1].value
+        userInfo.password = e.target[3].value
+
+        userName.innerHTML = userInfo.name
     }
-    console.log(e);
-    console.log(userInfo)
+    else {
+        alert("Password must be same.")
+    }
     createUserWithEmailAndPassword(auth, userInfo.email, userInfo.password)
         .then((userCredential) => {
-            const user = userCredential.userInfo;
+            const user = userCredential.user;
+            set(ref(database, 'users/' + user.uid), {
+                username: userInfo.name,
+                email: userInfo.email
+            }
+            )
+            alert('Signed Up successfully.')
+            // window.location.href = 'https://serene-figolla-e2186d.netlify.app/'
+            signUpPage.style.display = 'none'
+            loginPage.style.display = 'none'
+            dashboard.style.display = 'block'
         })
         .catch((error) => {
             const errorCode = error.code;
             const errorMessage = error.message;
-            // ..
+            alert(errorMessage)
         })
 })
 
-form2.addEventListener('submit', (e)=>{
+form2.addEventListener('submit', (e) => {
     e.preventDefault()
     const userInfo = {
         email: e.target[0].value,
         password: e.target[1].value
     }
-    console.log(e);
-    console.log(userInfo)
-    createUserWithEmailAndPassword(auth, userInfo.email, userInfo.password)
+
+    signInWithEmailAndPassword(auth, userInfo.email, userInfo.password)
         .then((userCredential) => {
-            const user = userCredential.userInfo;
-            console.log(user);
+            const user = userCredential.user;
+
+            const date = new Date()
+            update(ref(database, 'users/' + user.uid), {
+                last_login: date
+            })
+            alert('Loged In')
+            // window.location.href = 'https://serene-figolla-e2186d.netlify.app/'
+            userName.innerHTML = userInfo.email
+            signUpPage.style.display = 'none'
+            loginPage.style.display = 'none'
+            dashboard.style.display = 'block'
         })
         .catch((error) => {
             const errorCode = error.code;
             const errorMessage = error.message;
-            window.location.href = "https://serene-figolla-e2186d.netlify.app/"
-        })
+            alert('Invalid Email or password.')
+        });
 })
+
+const user = auth.currentUser;
+onAuthStateChanged(auth, (user) => {
+    if (user) {
+        const uid = user.uid;
+    } else {
+
+    }
+});
+
+const logout = document.getElementById('logout')
+
+logout.addEventListener('click',()=>{
+    signOut(auth).then(() => {
+
+        alert('Do you want to logout.')
+
+        loginPage.style.display = 'block'
+        signUpPage.style.display = 'none'
+        dashboard.style.display = 'none'
+
+      })
+      .catch((error) => {
+
+        const errorCode = error.code;
+        const errorMessage = error.message;
+        alert(errorMessage)
+
+      });
+})
+
 
 const login = document.getElementById('login')
 const signup = document.getElementById('signup')
-const signUpPage = document.getElementById('sign-up-page')
-const loginPage = document.getElementById('login-page')
 const link = document.getElementById('link')
 const checkBox1 = document.getElementById('checkbox-1')
 const checkBox2 = document.getElementById('checkbox-2')
+let password1 = document.getElementById('password-1')
+let password2 = document.getElementById('password-2')
+let password3 = document.getElementById('password-3')
 
 signup.addEventListener('click', () => {
     loginPage.style.display = 'none'
@@ -83,19 +147,10 @@ link.addEventListener('click', () => {
 })
 
 checkBox1.addEventListener('change', () => {
-    let password1 = document.getElementById('password-1')
-    let password2 = document.getElementById('password-2')
-    let password3 = document.getElementById('password-3')
-    password1.type = this.checked ? 'text' : 'password'
-    password2.type = this.checked ? 'text' : 'password'
-    password3.type = this.checked ? 'text' : 'password'
+    password1.type = checkBox1.checked ? 'text' : 'password'
+    password2.type = checkBox1.checked ? 'text' : 'password'
 })
 checkBox2.addEventListener('change', () => {
-    let password1 = document.getElementById('password-1')
-    let password2 = document.getElementById('password-2')
-    let password3 = document.getElementById('password-3')
-    password1.type = this.checked ? 'text' : 'password'
-    password2.type = this.checked ? 'text' : 'password' 
-    password3.type = this.checked ? 'text' : 'password'
+    password3.type = checkBox2.checked ? 'text' : 'password'
 })
 
