@@ -4,7 +4,7 @@ import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, on
 import { getAnalytics } from "https://www.gstatic.com/firebasejs/10.5.2/firebase-analytics.js";
 
 import {
-    getFirestore, collection, addDoc, getDocs
+    getFirestore, collection, addDoc, getDocs, doc, deleteDoc
 } from "https://www.gstatic.com/firebasejs/10.5.2/firebase-firestore.js";
 
 const firebaseConfig = {
@@ -48,6 +48,21 @@ setTimeout(() => {
             dashboard.style.display = 'block'
 
             userName.innerHTML = user.email
+
+            // async function getUserName() {
+            //     blog.innerHTML = null
+            
+            //     const querySnapshot = await getDocs(collection(db, 'userName'));
+            //     querySnapshot.forEach((FSDoc) => {
+            
+            //         const FSData = FSDoc.data()
+            //         if(FSData.email == user.email){
+                        
+            //         }
+            //         console.log(FSData);
+            //     });
+            // }
+            // getUserName()
             getDataFS()
         } else {
             signUpPage.style.display = 'block'
@@ -80,8 +95,20 @@ form1.addEventListener('submit', (e) => {
                 email: userInfo.email
             })
 
+            async function addUserNameToFS() {
+                try {
+                    const docRef = await addDoc(collection(db, 'userName'), {
+                        username: userInfo.name,
+                        email: userInfo.email
+                    });
+
+                } catch (e) {
+                    console.error("Error adding document: ", e);
+                }
+            }
+            addUserNameToFS()
+
             alert('Signed Up successfully.')
-            // window.location.href = 'https://serene-figolla-e2186d.netlify.app/'
             signUpPage.style.display = 'none'
             loginPage.style.display = 'none'
             dashboard.style.display = 'block'
@@ -110,9 +137,7 @@ form2.addEventListener('submit', (e) => {
 
             update(ref(database, 'users/' + user.uid), {
                 last_login: dt
-            })
-
-            userName.innerHTML = userInfo.email
+            })       
 
             signUpPage.style.display = 'none'
             loginPage.style.display = 'none'
@@ -172,29 +197,37 @@ async function getDataFS() {
     blog.innerHTML = null
 
     const querySnapshot = await getDocs(addDataToFS);
-    querySnapshot.forEach((doc) => {    
+    querySnapshot.forEach((FSDoc) => {
 
-        const FSData = doc.data()
+        const FSData = FSDoc.data()
 
-        const blogDiv = `<div>
-        <h1>${FSData.Title}</h1>
-        <p>${FSData.Desc}</p>
-        <button id=${this.doc.id} class="del-btn">Delete</button>
-        </div>`
-        
-        blog.innerHTML += blogDiv
-        
-        const buttonElement = document.getElementById(this.doc.id);
-        
-        if (buttonElement) {
-            buttonElement.addEventListener('click', function() {
+        const blogDiv = document.createElement('div')
+        blogDiv.className = 'blog-div'
+        const main = document.createElement('div')
+        main.className = 'blog-main'
+        const title = document.createElement('h3')
+        title.className = 'blog-title'
+        title.innerHTML = FSData.Title
+        const span = document.createElement('span')
+        span.className = 'blog-desc'
+        span.innerHTML = FSData.Desc
+        const button = document.createElement('button')
+        button.className = 'btn'
+        button.innerHTML = 'Delete'
+        button.id = FSDoc.id
 
-                console.log(`Button with id ${this.doc.id} clicked!`);
-                
-            });
-        } else {
-            console.error(`Button with id ${this.doc.id} not found`);
-        }
+        main.appendChild(title)
+        main.appendChild(span)
+        blogDiv.appendChild(main)
+        blogDiv.appendChild(button)
+        blog.appendChild(blogDiv)
+
+        button.addEventListener('click', async function () {
+            alert('Do you want to delete!')
+            const docRef = doc(db, 'blogs', this.id)
+            await deleteDoc(docRef)
+            getDataFS()
+        });
 
     });
 

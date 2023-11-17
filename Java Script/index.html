@@ -1,26 +1,643 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
-    <link rel="stylesheet" href="index.css">
-  </head>
-  <body>
-    <h1>Javascript Simple Counter Application</h1>
 
-    <div class="container">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Personal Blogging App</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-      <h3 id ='counter'>0</h3>
+        body {
+            font-family: sans-serif;
+            background-color: ghostwhite;
+        }
 
-      <div>
-        <button onclick="handleCounter('plus')" class="plus">+</button>
-        <button onclick="handleCounter('minus')" class="minus">-</button>
-        <button onclick="handleCounter('reset')" class="reset">reset</button>
-      </div>
+        #sign-up-page {
+            display: none;
+        }
+
+        #login-page {
+            display: none;
+        }
+
+        #dashboard {
+            display: none;
+        }
+
+        nav {
+            background-color: rgba(123, 0, 148);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0px 40px;
+            height: 70px;
+            color: white;
+            position: sticky;
+            top: 0;
+            box-shadow: 1px 1px 5px rgb(153, 153, 153);
+        }
+
+        h1 {
+            cursor: pointer;
+        }
+
+        nav a:nth-child(1) {
+            text-decoration: none;
+            color: white;
+        }
+
+        nav a:nth-child(2) {
+            font-size: 20px;
+            color: white;
+            transition: all .1s ease-out;
+        }
+
+        nav a:nth-child(2):hover {
+            color: rgb(50, 0, 131);
+        }
+
+        .sign-up {
+            height: 440px;
+            width: 350px;
+            margin: 50px auto;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-around;
+            align-items: center;
+            box-shadow: 0px 2px 10px 1px rgb(190, 190, 190);
+            border-radius: 5px;
+            background-color: white;
+        }
+
+        .sign-up-2 {
+            height: 360px;
+            width: 350px;
+            margin: 70px auto;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-around;
+            align-items: center;
+            box-shadow: 0px 2px 10px 1px rgb(190, 190, 190);
+            border-radius: 5px;
+            background-color: white;
+            padding: 30px 0px;
+        }
+
+        .btn {
+            height: 40px;
+            width: 100px;
+            background-color: white;
+            color: rgb(129, 0, 155);
+            border: 1px solid rgb(129, 0, 155);
+            cursor: pointer;
+            font-size: 18px;
+            border-radius: 5px;
+            transition: transform .3s ease-out, background-color .5s ease-in, color .3s ease-out;
+        }
+
+        .btn:hover {
+            background-color: rgb(129, 0, 155);
+            color: white;
+            box-shadow: 1px 1px 5px 1px rgb(129, 129, 129);
+            transform: scale(1.08);
+        }
+
+        .main {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-around;
+            width: 320px;
+            height: 300px;
+        }
+
+        .main input {
+            height: 40px;
+            border-radius: 5px;
+            border: 1px solid rgb(201, 201, 201);
+            padding-left: 10px;
+            font-size: 16px;
+        }
+
+        .main input:focus {
+            outline: 1px solid rgba(123, 0, 148, 0.5);
+            box-shadow: 0px 0px 6px 1px rgba(123, 0, 148, 0.5);
+            border: none;
+        }
+
+        .main-2 {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-around;
+            width: 320px;
+            height: 170px;
+        }
+
+        .main-2 input {
+            height: 40px;
+            border-radius: 5px;
+            border: 1px solid rgb(201, 201, 201);
+            padding-left: 10px;
+            font-size: 16px;
+        }
+
+        .main-2 input:focus {
+            outline: 1px solid rgba(123, 0, 148, 0.5);
+            box-shadow: 0px 0px 6px 1px rgba(123, 0, 148, 0.5);
+            border: none;
+        }
+
+        input[type="checkbox"] {
+            height: 14px;
+        }
+
+        input[type="checkbox"]:focus {
+            outline: none;
+            box-shadow: none;
+        }
+
+        #checkbox {
+            cursor: pointer;
+        }
+
+        .postBlog {
+            height: 250px;
+            max-width: 800px;
+            margin-left: 100px;
+            margin-top: 50px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-evenly;
+            box-shadow: 0px 0px 5px 1px rgb(199, 199, 199);
+            padding-left: 50px;
+            background-color: white;
+            margin-bottom: 30px;
+            min-width: 400px;
+        }
+
+        .postBlog input:nth-child(1) {
+            height: 35px;
+            max-width: 600px;
+        }
+
+        #textarea {
+            resize: vertical;
+            max-height: 150px;
+            min-height: 100px;
+            font-family: sans-serif;
+            padding: 5px;
+            padding-left: 10px;
+            max-width: 600px;
+            min-width: 300px;
+        }
+
+        .inputs {
+            padding-left: 10px;
+            border-radius: 5px;
+            font-size: 16px;
+            border: 1px solid rgb(201, 201, 201);
+            min-width: 300px;
+        }
+
+        .inputs:focus {
+            outline: 1px solid rgba(123, 0, 148, 0.5);
+            box-shadow: 0px 0px 6px 1px rgba(123, 0, 148, 0.5);
+            border: none;
+        }
+
+        .nav-right {
+            width: 450px;
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+        }
+
+        .dots-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            width: 100%;
+        }
+
+        .dot {
+            height: 20px;
+            width: 20px;
+            margin-right: 10px;
+            border-radius: 10px;
+            background-color: #b3d4fc;
+            animation: pulse 1.5s infinite ease-in-out;
+        }
+
+        .dot:last-child {
+            margin-right: 0;
+        }
+
+        .dot:nth-child(1) {
+            animation-delay: -0.3s;
+        }
+
+        .dot:nth-child(2) {
+            animation-delay: -0.1s;
+        }
+
+        .dot:nth-child(3) {
+            animation-delay: 0.1s;
+        }
+
+        @keyframes pulse {
+            0% {
+                transform: scale(0.8);
+                background-color: rgb(181, 0, 218, .8);
+                box-shadow: 0 0 0 0 rgba(221, 48, 255, 0.2);
+            }
+
+            50% {
+                transform: scale(1.2);
+                background-color: rgba(221, 48, 255, 0.8);
+                box-shadow: 0 0 0 10px rgba(178, 212, 252, 0);
+            }
+
+            100% {
+                transform: scale(0.8);
+                background-color: rgb(181, 0, 218, .8);
+                box-shadow: 0 0 0 0 rgba(221, 48, 255, 0.8);
+            }
+        }
+
+        .blog-div {
+            margin-left: 100px;
+            margin-top: 10px;
+            min-height: 150px;
+            max-width: 800px;
+            min-width: 400px;
+            padding: 10px;
+            border: 1px solid rgb(207, 207, 207);
+            border-radius: 5px;
+            background-color: white;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            box-shadow: 1px 1px 5px rgb(197, 197, 197);
+        }
+
+        .blog-main {
+            word-wrap: break-word;
+            margin-bottom: 10px;
+        }
+
+        .blog-title {
+            margin: 10px;
+            margin-left: 0px;
+            margin-top: 0px;
+        }
+
+        .blog-desc {
+            display: block;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="sign-up-page">
+        <nav>
+            <a href="JS-Assignment 07.html">
+                <h1>Blogging</h1>
+            </a>
+            <a href="#" id="login">Login</a>
+        </nav>
+        <form class="sign-up" id="form-1">
+            <h1 style="cursor: default;">Sign Up</h1>
+            <div class="main">
+                <input type="text" placeholder="User Name" required>
+                <input type="email" placeholder="Enter your Email" required>
+                <input type="password" placeholder="Password" required id="password-1">
+                <input type="password" placeholder="Enter Password Again" required id="password-2">
+                <label id="checkbox"><input type="checkbox" id="checkbox-1"> Show Password</label>
+                <a href="#" id="link">Already have an account?</a>
+            </div>
+            <a href=""><button class="btn">Sign Up</button></a>
+        </form>
     </div>
-    
-    <script src="math.js"></script>
-  </body>
+
+    <div id="login-page">
+        <nav>
+            <a href="JS-Assignment 07.html">
+                <h1>Blogging</h1>
+            </a>
+            <a href="#" id="signup">SignUp</a>
+        </nav>
+        <form class="sign-up-2" id="form-2">
+            <h1 style="cursor: default;">Login</h1>
+            <div class="main-2">
+                <input type="email" placeholder="Enter your Email" required>
+                <input type="password" placeholder="Password" required id="password-3">
+                <label id="checkbox"><input type="checkbox" id="checkbox-2"> Show Password</label>
+            </div>
+            <a href=""><button class="btn">Login</button></a>
+        </form>
+    </div>
+
+    <div id="dashboard">
+        <nav>
+            <a href="JS-Assignment 07.html">
+                <h1>Blogging</h1>
+            </a>
+            <div class="nav-right">
+                <p id="userName" style="color: rgb(236, 236, 236); font-size: 15px;"></p>
+                <a href="#" id="logout" style="margin-left: 10px;">logout</a>
+            </div>
+        </nav>
+        <div class="postBlog">
+            <input type="text" placeholder="Titile" class="inputs" id="blog-input">
+            <textarea id="textarea" cols="10" rows="5" placeholder="Description" class="inputs"></textarea>
+            <button class="btn" id="post-blog-btn">Post Blog</button>
+        </div>
+        <div id="blog"></div>
+    </div>
+
+    <section class="dots-container">
+        <div class="dot"></div>
+        <div class="dot"></div>
+        <div class="dot"></div>
+        <div class="dot"></div>
+        <div class="dot"></div>
+    </section>
+
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.5.2/firebase-app.js";
+        import { getDatabase, set, ref, update } from "https://www.gstatic.com/firebasejs/10.5.2/firebase-database.js";
+        import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.5.2/firebase-auth.js";
+        import { getAnalytics } from "https://www.gstatic.com/firebasejs/10.5.2/firebase-analytics.js";
+
+        import {
+            getFirestore, collection, addDoc, getDocs, doc, deleteDoc
+        } from "https://www.gstatic.com/firebasejs/10.5.2/firebase-firestore.js";
+
+        const firebaseConfig = {
+            apiKey: "AIzaSyAHQyxWbE0KXf5RYphu1syMdxxLciEq-Jk",
+            authDomain: "blog-app-ab7a6.firebaseapp.com",
+            projectId: "blog-app-ab7a6",
+            storageBucket: "blog-app-ab7a6.appspot.com",
+            messagingSenderId: "993767007431",
+            appId: "1:993767007431:web:ef1a307738ba35d1a40ae2",
+            measurementId: "G-1Z0SBNGKMJ"
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const database = getDatabase(app)
+        const analytics = getAnalytics(app);
+        const auth = getAuth(app)
+        const db = getFirestore(app)
+
+        const addDataToFS = collection(db, 'blogs')
+
+        const form1 = document.getElementById('form-1')
+        const form2 = document.getElementById('form-2')
+        const signUpPage = document.getElementById('sign-up-page')
+        const loginPage = document.getElementById('login-page')
+        const dashboard = document.getElementById('dashboard')
+        const userName = document.getElementById('userName')
+        const dotsContainer = document.querySelector('.dots-container')
+        const postBlogBtn = document.getElementById('post-blog-btn')
+        const blogInput = document.getElementById('blog-input')
+        const blogDesc = document.getElementById('textarea')
+        const blog = document.getElementById('blog')
+
+        setTimeout(() => {
+            onAuthStateChanged(auth, (user) => {
+                if (user) {
+                    const uid = user.uid;
+
+                    signUpPage.style.display = 'none'
+                    loginPage.style.display = 'none'
+                    dotsContainer.style.display = 'none'
+                    dashboard.style.display = 'block'
+
+                    userName.innerHTML = user.email
+
+                    // async function getUserName() {
+                    //     blog.innerHTML = null
+
+                    //     const querySnapshot = await getDocs(collection(db, 'userName'));
+                    //     querySnapshot.forEach((FSDoc) => {
+
+                    //         const FSData = FSDoc.data()
+                    //         if(FSData.email == user.email){
+
+                    //         }
+                    //         console.log(FSData);
+                    //     });
+                    // }
+                    // getUserName()
+                    getDataFS()
+                } else {
+                    signUpPage.style.display = 'block'
+                }
+            });
+        }, '1000');
+
+        form1.addEventListener('submit', (e) => {
+            e.preventDefault()
+
+            let userInfo = {}
+
+            if (e.target[2].value == e.target[3].value) {
+
+                userInfo.name = e.target[0].value
+                userInfo.email = e.target[1].value
+                userInfo.password = e.target[3].value
+
+                userName.innerHTML = userInfo.name
+            }
+            else {
+                alert("Password must be same.")
+            }
+            createUserWithEmailAndPassword(auth, userInfo.email, userInfo.password)
+                .then((userCredential) => {
+                    const user = userCredential.user;
+
+                    set(ref(database, 'users/' + user.uid), {
+                        username: userInfo.name,
+                        email: userInfo.email
+                    })
+
+                    async function addUserNameToFS() {
+                        try {
+                            const docRef = await addDoc(collection(db, 'userName'), {
+                                username: userInfo.name,
+                                email: userInfo.email
+                            });
+
+                        } catch (e) {
+                            console.error("Error adding document: ", e);
+                        }
+                    }
+                    addUserNameToFS()
+
+                    alert('Signed Up successfully.')
+                    signUpPage.style.display = 'none'
+                    loginPage.style.display = 'none'
+                    dashboard.style.display = 'block'
+                })
+                .catch((error) => {
+                    const errorCode = error.code;
+                    const errorMessage = error.message;
+                    alert(errorMessage)
+                })
+        })
+
+
+        form2.addEventListener('submit', (e) => {
+            e.preventDefault()
+            const userInfo = {
+                email: e.target[0].value,
+                password: e.target[1].value
+            }
+
+            signInWithEmailAndPassword(auth, userInfo.email, userInfo.password)
+                .then((userCredential) => {
+                    const user = userCredential.user;
+
+                    const date = new Date()
+                    const dt = date.toLocaleString()
+
+                    update(ref(database, 'users/' + user.uid), {
+                        last_login: dt
+                    })
+
+                    signUpPage.style.display = 'none'
+                    loginPage.style.display = 'none'
+                    dashboard.style.display = 'block'
+                })
+                .catch((error) => {
+                    const errorCode = error.code;
+                    const errorMessage = error.message;
+                    alert('Invalid Email or password.')
+                });
+        })
+
+        const logout = document.getElementById('logout')
+
+        logout.addEventListener('click', () => {
+            signOut(auth).then(() => {
+
+                alert('Do you want to logout.')
+
+                loginPage.style.display = 'block'
+                signUpPage.style.display = 'none'
+                dashboard.style.display = 'none'
+
+            })
+                .catch((error) => {
+
+                    const errorCode = error.code;
+                    const errorMessage = error.message;
+                    alert(errorMessage)
+
+                });
+        })
+
+        postBlogBtn.addEventListener('click', async () => {
+
+            if (!blogInput.value && !blogDesc.value) return alert('Enter your title and description!')
+
+            try {
+                const docRef = await addDoc(addDataToFS, {
+                    Title: blogInput.value,
+                    Desc: blogDesc.value
+                });
+
+                console.log("Document written with ID: ", docRef.id);
+
+            } catch (e) {
+                console.error("Error adding document: ", e);
+            }
+
+            getDataFS()
+
+            blogDesc.value = ''
+            blogInput.value = ''
+        })
+
+        async function getDataFS() {
+            blog.innerHTML = null
+
+            const querySnapshot = await getDocs(addDataToFS);
+            querySnapshot.forEach((FSDoc) => {
+
+                const FSData = FSDoc.data()
+
+                const blogDiv = document.createElement('div')
+                blogDiv.className = 'blog-div'
+                const main = document.createElement('div')
+                main.className = 'blog-main'
+                const title = document.createElement('h3')
+                title.className = 'blog-title'
+                title.innerHTML = FSData.Title
+                const span = document.createElement('span')
+                span.className = 'blog-desc'
+                span.innerHTML = FSData.Desc
+                const button = document.createElement('button')
+                button.className = 'btn'
+                button.innerHTML = 'Delete'
+                button.id = FSDoc.id
+
+                main.appendChild(title)
+                main.appendChild(span)
+                blogDiv.appendChild(main)
+                blogDiv.appendChild(button)
+                blog.appendChild(blogDiv)
+
+                button.addEventListener('click', async function () {
+                    alert('Do you want to delete!')
+                    const docRef = doc(db, 'blogs', this.id)
+                    await deleteDoc(docRef)
+                    getDataFS()
+                });
+
+            });
+
+        }
+
+        const login = document.getElementById('login')
+        const signup = document.getElementById('signup')
+        const link = document.getElementById('link')
+        const checkBox1 = document.getElementById('checkbox-1')
+        const checkBox2 = document.getElementById('checkbox-2')
+        let password1 = document.getElementById('password-1')
+        let password2 = document.getElementById('password-2')
+        let password3 = document.getElementById('password-3')
+
+        signup.addEventListener('click', () => {
+            loginPage.style.display = 'none'
+            signUpPage.style.display = 'block'
+        })
+
+        login.addEventListener('click', () => {
+            loginPage.style.display = 'block'
+            signUpPage.style.display = 'none'
+        })
+
+        link.addEventListener('click', () => {
+            loginPage.style.display = 'block'
+            signUpPage.style.display = 'none'
+        })
+
+        checkBox1.addEventListener('change', () => {
+            password1.type = checkBox1.checked ? 'text' : 'password'
+            password2.type = checkBox1.checked ? 'text' : 'password'
+        })
+        checkBox2.addEventListener('change', () => {
+            password3.type = checkBox2.checked ? 'text' : 'password'
+        })
+
+
+    </script>
+</body>
+
 </html>
