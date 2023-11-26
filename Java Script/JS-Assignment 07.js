@@ -4,7 +4,7 @@ import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, on
 import { getAnalytics } from "https://www.gstatic.com/firebasejs/10.5.2/firebase-analytics.js";
 
 import {
-    getFirestore, collection, addDoc, getDocs, doc, deleteDoc
+    getFirestore, collection, addDoc, getDocs, doc, deleteDoc, setDoc, getDoc, query, where
 } from "https://www.gstatic.com/firebasejs/10.5.2/firebase-firestore.js";
 
 const firebaseConfig = {
@@ -36,39 +36,34 @@ const postBlogBtn = document.getElementById('post-blog-btn')
 const blogInput = document.getElementById('blog-input')
 const blogDesc = document.getElementById('textarea')
 const blog = document.getElementById('blog')
+const postBlogForm = document.getElementById('postBlogForm')
 
-setTimeout(() => {
-    onAuthStateChanged(auth, (user) => {
-        if (user) {
-            const uid = user.uid;
+let useruid;
+let userNameVar;
+onAuthStateChanged(auth, async (user) => {
+    if (user) {
+        useruid = user.uid;
 
+        const docRef = doc(db, "userName", user.uid);
+        const docSnap = await getDoc(docRef);
+
+        userName.innerHTML = docSnap.data().username
+        userNameVar = docSnap.data().username
+
+        setTimeout(() => {
             signUpPage.style.display = 'none'
             loginPage.style.display = 'none'
-            dotsContainer.style.display = 'none'
             dashboard.style.display = 'block'
+            dotsContainer.style.display = 'none'
+        }, '1000');
 
-            userName.innerHTML = user.email
+        getDataFS()
+    } else {
+        signUpPage.style.display = 'block'
+        dotsContainer.style.display = 'none'
+    }
 
-            // async function getUserName() {
-            //     blog.innerHTML = null
-            
-            //     const querySnapshot = await getDocs(collection(db, 'userName'));
-            //     querySnapshot.forEach((FSDoc) => {
-            
-            //         const FSData = FSDoc.data()
-            //         if(FSData.email == user.email){
-                        
-            //         }
-            //         console.log(FSData);
-            //     });
-            // }
-            // getUserName()
-            getDataFS()
-        } else {
-            signUpPage.style.display = 'block'
-        }
-    });
-}, '1000');
+});
 
 form1.addEventListener('submit', (e) => {
     e.preventDefault()
@@ -87,7 +82,7 @@ form1.addEventListener('submit', (e) => {
         alert("Password must be same.")
     }
     createUserWithEmailAndPassword(auth, userInfo.email, userInfo.password)
-        .then((userCredential) => {
+        .then(async (userCredential) => {
             const user = userCredential.user;
 
             set(ref(database, 'users/' + user.uid), {
@@ -95,18 +90,11 @@ form1.addEventListener('submit', (e) => {
                 email: userInfo.email
             })
 
-            async function addUserNameToFS() {
-                try {
-                    const docRef = await addDoc(collection(db, 'userName'), {
-                        username: userInfo.name,
-                        email: userInfo.email
-                    });
-
-                } catch (e) {
-                    console.error("Error adding document: ", e);
-                }
-            }
-            addUserNameToFS()
+            const userRef = doc(db, "userName", user.uid)
+            await setDoc(userRef, {
+                username: userInfo.name,
+                email: userInfo.email
+            })
 
             alert('Signed Up successfully.')
             signUpPage.style.display = 'none'
@@ -137,7 +125,7 @@ form2.addEventListener('submit', (e) => {
 
             update(ref(database, 'users/' + user.uid), {
                 last_login: dt
-            })       
+            })
 
             signUpPage.style.display = 'none'
             loginPage.style.display = 'none'
@@ -153,32 +141,52 @@ form2.addEventListener('submit', (e) => {
 const logout = document.getElementById('logout')
 
 logout.addEventListener('click', () => {
-    signOut(auth).then(() => {
+    if (confirm('Do you want to logout.')) {
+        signOut(auth).then(() => {
 
-        alert('Do you want to logout.')
+            dotsContainer.style.display = 'flex'
+            dashboard.style.display = 'none'
+            loginPage.style.display = 'none'
+            signUpPage.style.display = 'none'
 
-        loginPage.style.display = 'block'
-        signUpPage.style.display = 'none'
-        dashboard.style.display = 'none'
+            setTimeout(() => {
+                loginPage.style.display = 'block'
+                dotsContainer.style.display = 'none'
+            }, '2000');
 
-    })
-        .catch((error) => {
+        })
+            .catch((error) => {
 
-            const errorCode = error.code;
-            const errorMessage = error.message;
-            alert(errorMessage)
+                const errorCode = error.code;
+                const errorMessage = error.message;
+                alert(errorMessage)
 
-        });
+            });
+    }
 })
 
-postBlogBtn.addEventListener('click', async () => {
+async function PostBlog() {
 
-    if (!blogInput.value && !blogDesc.value) return alert('Enter your title and description!')
+    if (!blogInput.value || !blogDesc.value) return alert('Enter your title and description!');
+
+    let userLevel;
+    document.getElementsByName('level').forEach((data) => {
+        if (data.checked) {
+            userLevel = data.value
+        }
+    })
+
+    const date = new Date()
+    const newDate = date.toLocaleString()
 
     try {
         const docRef = await addDoc(addDataToFS, {
             Title: blogInput.value,
-            Desc: blogDesc.value
+            Desc: blogDesc.value,
+            user: useruid,
+            level: userLevel,
+            username: userNameVar,
+            date: newDate
         });
 
         console.log("Document written with ID: ", docRef.id);
@@ -191,18 +199,30 @@ postBlogBtn.addEventListener('click', async () => {
 
     blogDesc.value = ''
     blogInput.value = ''
+}
+
+postBlogBtn.addEventListener('click', () => {
+    PostBlog()
+})
+
+postBlogForm.addEventListener('submit', (e) => {
+    e.preventDefault();
+    PostBlog();
 })
 
 async function getDataFS() {
     blog.innerHTML = null
 
     const querySnapshot = await getDocs(addDataToFS);
-    querySnapshot.forEach((FSDoc) => {
-
+    querySnapshot.forEach(async (FSDoc) => {
         const FSData = FSDoc.data()
 
         const blogDiv = document.createElement('div')
         blogDiv.className = 'blog-div'
+        const userNameDiv = document.createElement('div')
+        const userNameSpan = document.createElement('span')
+        const newDate = document.createElement('span')
+        newDate.innerHTML = FSData.date
         const main = document.createElement('div')
         main.className = 'blog-main'
         const title = document.createElement('h3')
@@ -211,22 +231,29 @@ async function getDataFS() {
         const span = document.createElement('span')
         span.className = 'blog-desc'
         span.innerHTML = FSData.Desc
-        const button = document.createElement('button')
-        button.className = 'btn'
+        const button = document.createElement('a')
+        button.className = 'del-btn'
         button.innerHTML = 'Delete'
         button.id = FSDoc.id
 
+        blogDiv.appendChild(userNameDiv)
+        userNameDiv.appendChild(userNameSpan)
+        userNameDiv.appendChild(newDate)
+        blogDiv.appendChild(main)
         main.appendChild(title)
         main.appendChild(span)
-        blogDiv.appendChild(main)
         blogDiv.appendChild(button)
         blog.appendChild(blogDiv)
 
+        userNameSpan.innerHTML = FSData.username
+
         button.addEventListener('click', async function () {
-            alert('Do you want to delete!')
-            const docRef = doc(db, 'blogs', this.id)
-            await deleteDoc(docRef)
-            getDataFS()
+
+            if (confirm('Do you want to delete!')) {
+                const docRef = doc(db, 'blogs', this.id)
+                await deleteDoc(docRef)
+                getDataFS()
+            }
         });
 
     });
@@ -241,6 +268,10 @@ const checkBox2 = document.getElementById('checkbox-2')
 let password1 = document.getElementById('password-1')
 let password2 = document.getElementById('password-2')
 let password3 = document.getElementById('password-3')
+const navDiv1 = document.querySelector('.nav-div-1')
+const navDiv2 = document.querySelector('.nav-div-2')
+const navRight = document.querySelector('.nav-right')
+const filterBtn = document.getElementById('filterBtn')
 
 signup.addEventListener('click', () => {
     loginPage.style.display = 'none'
@@ -265,3 +296,45 @@ checkBox2.addEventListener('change', () => {
     password3.type = checkBox2.checked ? 'text' : 'password'
 })
 
+navDiv1.addEventListener('mouseover', () => {
+    navDiv2.style.display = 'block'
+    navRight.style.height = '178px'
+})
+
+navDiv2.addEventListener('mouseover', () => {
+    navDiv2.style.display = 'block'
+    navRight.style.height = '178px'
+})
+
+navDiv1.addEventListener('mouseout', () => {
+    navDiv2.style.display = 'none'
+    navRight.style.height = '70px'
+})
+navDiv2.addEventListener('mouseout', () => {
+    navDiv2.style.display = 'none'
+    navRight.style.height = '70px'
+})
+
+filterBtn.addEventListener('click', () => {
+    let filter;
+    let q;
+    document.getElementsByName('query').forEach((data) => {
+        if (data.checked) {
+            filter = data.value
+        }
+    })
+    if (filter === "All") {
+        q = query(collection(db, "blogs"), where())
+    }
+    if (filter === "Beginner") {
+        q = query(collection(db, "blogs"), where("level", "==", "Beginner"))
+    }
+    if (filter === "Intermediate") {
+        q = query(collection(db, "blogs"), where("level", "==", "Intermediate"))
+    }
+    if (filter === "Expert") {
+        q = query(collection(db, "blogs"), where("level", "==", "Expert"))
+    }
+
+    console.log(filter);
+})
