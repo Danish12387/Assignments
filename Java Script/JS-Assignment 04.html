@@ -1,0 +1,465 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quiz</title>
+    <link rel="stylesheet" href="JS-Assignment 04.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Roboto&family=Ubuntu&display=swap');
+        @import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css');
+        
+        * {
+            margin: 0px;
+            padding: 0px;
+            box-sizing: border-box;
+            font-family: 'Ubuntu', sans-serif;
+        }
+        
+        body {
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .container {
+            height: 90%;
+            width: 350px;
+            /* padding: 20px; */
+            box-shadow: 0px 0px 10px 2px rgb(189, 189, 189);
+            border-radius: 20px;
+            background-color: white;
+            position: relative;
+            display: flex;
+            justify-content: space-between;
+            /* align-items: center; */
+            flex-direction: column;
+        }
+        
+        #set-time-div {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-top: 40px;
+            margin-right: 20px;
+            margin-left: 20px;
+        }
+        
+        #set-time {
+            border: 1px solid grey;
+            padding: 14px 15px;
+            border-radius: 100%;
+            font-size: 24px;
+            font-weight: bold;
+            font-family: sans-serif;
+            background: linear-gradient(45deg, transparent, #c40094, transparent);
+            color: white;
+            border: none;
+        }
+        
+        .option-div {
+            display: block;
+            cursor: pointer;
+            margin-top: 20px;
+            border: 1px solid rgb(216, 216, 216);
+            border-radius: 12px;
+            height: 60px;
+            display: flex;
+            align-items: center;
+            padding: 7px;
+            font-size: 14px;
+            transition: all .2s ease-out;
+            margin-right: 20px;
+            margin-left: 20px;
+        }
+        
+        .option-div:hover {
+            transform: scale(1.03);
+            box-shadow: 0px 0px 5px 1px rgb(214, 214, 214);
+            color: #0ba6ff;
+        }
+        
+        .options-span {
+            margin-left: 5px;
+            margin-bottom: 5px;
+        }
+        
+        .question-h3 {
+            font-size: 18px;
+            margin-right: 20px;
+            margin-left: 20px;
+        }
+        
+        #buttons {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 70px;
+            border-bottom-left-radius: 20px;
+            border-bottom-right-radius: 20px;
+            padding: 0px 20px;
+            box-shadow: 0px 0px 10px 1px rgb(233, 233, 233);
+        }
+        
+        .btns {
+            height: 35px;
+            width: 120px;
+            border-radius: 50px;
+            cursor: not-allowed;
+            border: 1px solid grey;
+            color: grey;
+            background-color: white;
+            transition: transform .2s ease-out, background-color .5s ease-in, color .3s ease-out, border .6s ease-in-out;
+        }
+        
+        .btns:hover {
+            transform: scale(1.1);
+            background-color: #0ba6ff !important;
+            color: white !important;
+            border: 1px solid #0ba6ff !important;
+        }
+        
+        #back-btn {
+            display: none;
+            cursor: pointer;
+            border: 1px solid #0ba6ff;
+            color: #0ba6ff;
+        }
+        
+        #question-sent {
+            font-size: 14px;
+            color: rgb(119, 119, 119);
+        }
+        .result-div{
+            margin-top: 40px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            height: 400px;
+            text-align: center;
+            color: rgb(0, 167, 0);
+        }
+        .result-quote-div{
+            background-color: rgb(226, 255, 226);
+            height: 150px;
+            margin-left: 20px;
+            margin-right: 20px;
+            border-radius: 20px;
+            padding-top: 20px;
+        }
+        .result-head{
+            text-align: center;
+            font-family: 'Roboto',sans-serif;
+            color: black;
+        }
+        .quote-p{
+            font-size: 14px;
+            margin: 0px 30px;
+            margin-top: 20px;
+            color: rgb(99, 99, 99);
+        }
+        </style>
+</head>
+
+<body>
+    <div class="container">
+
+        <div id="set-time-div">
+            <div id="question-sent">
+                Question <span id="question-no"></span>: Select an Answer
+            </div>
+
+            <div>
+                <span id="set-time">30</span>
+            </div>
+        </div>
+
+        <div id="que-container"></div>
+
+        <div id="result-container"></div>
+
+        <div id="buttons">
+            <button id="back-btn" class="btns" disabled><span><i class="fa-solid fa-arrow-left"></i></span> Previous</button>
+            <button id="next-btn" disabled class="btns">Next <span><i class="fa-solid fa-arrow-right"></i></span></button>
+        </div>
+
+    </div>
+    <script>
+        const Questions = [
+            {
+                que: 'What is the National sports of Pakistan?',
+                options: ['FootBall', 'Cricket', 'Hockey', 'BaseBall'],
+                correct: 'Hockey'
+            },
+            {
+                que: 'Who inaugurated the State Bank of Pakistan?',
+                options: ['Quaid-e-Azam', 'Malik Ghulam Muhammad', 'Liaquat Ali Khan', 'Allama Muhammad Iqba'],
+                correct: 'Quaid-e-Azam'
+            },
+            {
+                que: 'Sardar Abdur Rub Nishtar was the Governor of?',
+                options: ['Gilgit Baltistan', 'KPK', 'Punjab', 'Sindh'],
+                correct: 'Punjab'
+            },
+            {
+                que: 'National code of Pakistan is?',
+                options: ['PAK', 'PK', 'PAK 1', 'None of them'],
+                correct: 'PK'
+            },
+            {
+                que: 'Where is Warsak Dam of Pakistan situated?',
+                options: ['Khyber Pakhtunkhwa', 'Punjab', 'Sindh', 'Balochistan'],
+                correct: 'Khyber Pakhtunkhwa'
+            },
+            {
+                que: 'When was Liaquat Nehru Pact between India and Pakistan signed?',
+                options: ['1955', '1950', '1964', '1951'],
+                correct: '1950'
+            },
+            {
+                que: 'Who was the First woman Governor of State Bank of Pakistan?',
+                options: ['Noor Jahan', 'Dr Shamshad Akhter', 'Farzana Raja', 'Dr Ashraf Abbasi'],
+                correct: 'Dr Shamshad Akhter'
+            },
+            {
+                que: 'Mirpur is a famous city of?',
+                options: ['KPK', 'Punjab', 'Azad Kashmir', 'None of them'],
+                correct: 'Azad Kashmir'
+            },
+            {
+                que: 'Defence day is observed on ___________ ?',
+                options: ['6th September', '11th September', '7th September', 'FootBall'],
+                correct: '6th September'
+            },
+            {
+                que: 'The common value among the people of Pakistan is?',
+                options: ['Dress', 'Language', 'Habits', 'Islam'],
+                correct: 'Islam'
+            }
+        ]
+
+        const queContainer = document.getElementById('que-container')
+        const resultContainer = document.getElementById('result-container')
+        const nextBtn = document.getElementById('next-btn')
+        const setTimespan = document.getElementById('set-time')
+        const setTimeDiv = document.getElementById('set-time-div')
+        const questionNo = document.getElementById('question-no')
+        const backBtn = document.getElementById('back-btn')
+        const buttons = document.getElementById('buttons')
+
+        let currentQuestion = 0
+        let rightAnswer = 0
+        let wrongAnswer = 0
+        let userAnswer = undefined
+        let span1 = 1
+        let Time = 30
+
+        function setTimeFunction() {
+            if (Time > 0) {
+                Time--
+                setTimespan.innerHTML = Time < 10 ? '0' + Time : Time
+            }
+        }
+
+        const timeInterval = setInterval(setTimeFunction, 1000)
+
+        function showQuestion() {
+            queContainer.innerHTML = null
+            let queDiv = document.createElement('div')
+            let h1 = document.createElement('h3')
+            h1.className = 'question-h3'
+            h1.innerHTML = Questions[currentQuestion].que
+            queDiv.appendChild(h1)
+            questionNo.innerHTML = span1
+            Time = 30
+
+            Questions[currentQuestion].options.map(data => {
+                let optionDiv = document.createElement('label')
+                optionDiv.className = 'option-div'
+                let input = document.createElement('input')
+                let span = document.createElement('span')
+                span.className = 'options-span'
+                input.type = 'radio'
+                input.style.backgroundColor = 'green'
+                input.name = 'options'
+                input.value = data
+                span.innerHTML = data
+                input.addEventListener('change', function () {
+                    console.log(this.value)
+                    userAnswer = this.value
+                    nextBtn.disabled = false
+                    nextBtn.style.cursor = 'pointer'
+                    nextBtn.style.border = '1px solid #0ba6ff'
+                    nextBtn.style.color = '#0ba6ff'
+                })
+                optionDiv.appendChild(input)
+                optionDiv.appendChild(span)
+                queDiv.appendChild(optionDiv)
+
+
+                optionDiv.addEventListener('click', function () {
+
+                    optionDiv.style.color = '#0ba6ff'
+                    optionDiv.style.boxShadow = '0px 0px 5px 1px rgb(214, 214, 214)'
+                    optionDiv.style.transform = 'scale(1.03)'
+
+                    // if (optionDiv.style.color == 'black') {
+                    //     optionDiv.style.color = '#0ba6ff';
+                    //     optionDiv.style.boxShadow = '0px 0px 5px 1px rgb(212, 212, 212)';
+                    // }
+                    // else{
+                    //     optionDiv.style.color = 'black';
+                    //     optionDiv.style.boxShadow = '';
+                    // }
+                })
+
+            })
+            queContainer.appendChild(queDiv)
+
+            if (currentQuestion > 0) {
+                buttons.style.justifyContent = 'space-between'
+            }
+            else {
+                buttons.style.justifyContent = 'flex-end'
+            }
+            const timeOut = setTimeout(checkAnswer, 30000)
+
+            if (currentQuestion === 0) {
+                backBtn.disabled = true
+                backBtn.style.display = 'none'
+            }
+        }
+
+        showQuestion()
+
+        function checkAnswer() {
+            let correctAns = Questions[currentQuestion].correct
+            span1++
+
+            if (userAnswer === correctAns) {
+                rightAnswer++
+            } else {
+                wrongAnswer++
+            }
+
+            if (currentQuestion + 1 === Questions.length) {
+                showResult()
+                clearInterval(timeInterval)
+            }
+
+            if (currentQuestion + 1 < Questions.length) {
+                currentQuestion++
+                showQuestion()
+                nextBtn.disabled = true
+            }
+
+            if (currentQuestion === Questions.length - 1) {
+                nextBtn.innerHTML = 'submit'
+            }
+
+            if (currentQuestion == 0) {
+                buttons.style.justifyContent = 'flex-end'
+            }
+
+            if (currentQuestion > 0 && currentQuestion < Questions.length) {
+                backBtn.disabled = false
+                backBtn.style.display = 'block'
+                buttons.style.justifyContent = 'space-between'
+            }
+
+            nextBtn.style.cursor = 'not-allowed'
+            nextBtn.style.border = '1px solid grey'
+            nextBtn.style.color = 'grey'
+        }
+
+        function showResult() {
+            let resultDiv = document.createElement('div')
+            resultDiv.className = 'result-div'
+
+            let resultHead = document.createElement('h2')
+            resultHead.className = 'result-head'
+            resultHead.innerHTML = 'Results'
+
+            let h2 = document.createElement('div')
+            h2.className = 'result-quote-div'
+
+            let quoteH2 = document.createElement('h2')
+            let quoteP = document.createElement('p')
+            quoteP.className = 'quote-p'
+
+
+            let score = document.createElement('h2')
+            let rightH3 = document.createElement('h3')
+            let wrongH3 = document.createElement('h3')
+
+            if (rightAnswer > wrongAnswer) {
+                quoteH2.innerHTML = 'Congratulatons! You Win.'
+                quoteH2.style.color = 'green'
+                quoteP.innerHTML = "You've completed the quiz with a perfect score."
+            } else {
+                quoteH2.innerHTML = 'You Lost!'
+                quoteH2.style.color = 'red'
+                quoteP.innerHTML = "You've completed the quiz with a Lower score."
+            }
+
+            score.innerHTML = 'Score: ' + rightAnswer * 10 + ' /100'
+            rightH3.innerHTML = 'Right Answers: ' + rightAnswer
+            wrongH3.innerHTML = 'Wrong Answers: ' + wrongAnswer
+
+            h2.appendChild(quoteH2)
+            h2.appendChild(quoteP)
+            resultDiv.appendChild(resultHead)
+            resultDiv.appendChild(h2)
+            resultDiv.appendChild(score)
+            resultDiv.appendChild(rightH3)
+            resultDiv.appendChild(wrongH3)
+            resultContainer.appendChild(resultDiv)
+
+            queContainer.style.display = 'none'
+            nextBtn.style.display = 'none'
+            backBtn.style.display = 'none'
+            setTimeDiv.style.display = 'none'
+            currentQuestion++
+        }
+
+        nextBtn.addEventListener('click', checkAnswer)
+
+        backBtn.addEventListener('click', function () {
+            currentQuestion--
+            span1--
+            if (currentQuestion === 0) {
+                backBtn.disabled = true
+                backBtn.style.display = 'none'
+            }
+            // if (currentQuestion < Questions.length) {
+            //     backBtn.disabled = false
+            //     backBtn.style.display = 'block'
+            //     buttons.style.justifyContent = 'space-between'
+            // }
+            // if (currentQuestion >= 9) {
+            //     currentQuestion = 0
+            //     currentQuestion = 0
+            //     rightAnswer = 0
+            //     wrongAnswer = 0
+            //     userAnswer = undefined
+            //     span1 = 1
+            //     Time = 30
+
+            //     resultContainer.style.display = 'none'
+
+            //     queContainer.style.display = 'block'
+            //     nextBtn.style.display = 'block'
+            //     setTimeDiv.style.display = 'block'
+            //     backBtn.innerHTML = 'Previous'
+
+            // }
+
+            showQuestion()
+        }
+        )
+    </script>
+</body>
+
+</html>

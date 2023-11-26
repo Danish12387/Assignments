@@ -1,0 +1,156 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto&family=Ubuntu&display=swap');
+@import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css');
+
+/* font-family: 'Roboto', sans-serif;
+font-family: 'Ubuntu', sans-serif; */
+* {
+    margin: 0px;
+    padding: 0px;
+    box-sizing: border-box;
+    font-family: 'Ubuntu', sans-serif;
+}
+
+body {
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: linear-gradient(45deg, transparent, #ffa1e7, transparent, #ffa1e7, transparent)
+}
+
+.container {
+    height: 90%;
+    width: 350px;
+    /* padding: 20px; */
+    box-shadow: 0px 0px 10px 2px rgb(189, 189, 189);
+    border-radius: 20px;
+    background-color: white;
+    position: relative;
+    display: flex;
+    justify-content: space-between;
+    /* align-items: center; */
+    flex-direction: column;
+}
+
+#set-time-div {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 40px;
+    margin-right: 20px;
+    margin-left: 20px;
+}
+
+#set-time {
+    border: 1px solid grey;
+    padding: 14px 15px;
+    border-radius: 100%;
+    font-size: 24px;
+    font-weight: bold;
+    font-family: sans-serif;
+    background: linear-gradient(45deg, transparent, #c40094, transparent);
+    color: white;
+    border: none;
+}
+
+.option-div {
+    display: block;
+    cursor: pointer;
+    margin-top: 20px;
+    border: 1px solid rgb(216, 216, 216);
+    border-radius: 12px;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    padding: 7px;
+    font-size: 14px;
+    transition: all .2s ease-out;
+    margin-right: 20px;
+    margin-left: 20px;
+}
+
+.option-div:hover {
+    transform: scale(1.03);
+    box-shadow: 0px 0px 5px 1px rgb(214, 214, 214);
+    color: #0ba6ff;
+}
+
+.options-span {
+    margin-left: 5px;
+    margin-bottom: 5px;
+}
+
+.question-h3 {
+    font-size: 18px;
+    margin-right: 20px;
+    margin-left: 20px;
+}
+
+#buttons {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 70px;
+    border-bottom-left-radius: 20px;
+    border-bottom-right-radius: 20px;
+    padding: 0px 20px;
+    box-shadow: 0px 0px 10px 1px rgb(233, 233, 233);
+}
+
+.btns {
+    height: 35px;
+    width: 120px;
+    border-radius: 50px;
+    cursor: not-allowed;
+    border: 1px solid grey;
+    color: grey;
+    background-color: white;
+    transition: transform .2s ease-out, background-color .5s ease-in, color .3s ease-out, border .6s ease-in-out;
+}
+
+.btns:hover {
+    transform: scale(1.1);
+    background-color: #0ba6ff !important;
+    color: white !important;
+    border: 1px solid #0ba6ff !important;
+}
+
+#back-btn {
+    display: none;
+    cursor: pointer;
+    border: 1px solid #0ba6ff;
+    color: #0ba6ff;
+}
+
+#question-sent {
+    font-size: 14px;
+    color: rgb(119, 119, 119);
+}
+.result-div{
+    margin-top: 40px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 400px;
+    text-align: center;
+    color: rgb(0, 167, 0);
+}
+.result-quote-div{
+    background-color: rgb(226, 255, 226);
+    height: 150px;
+    margin-left: 20px;
+    margin-right: 20px;
+    border-radius: 20px;
+    padding-top: 20px;
+}
+.result-head{
+    text-align: center;
+    font-family: 'Roboto',sans-serif;
+    color: black;
+}
+.quote-p{
+    font-size: 14px;
+    margin: 0px 30px;
+    margin-top: 20px;
+    color: rgb(99, 99, 99);
+}

@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Java Script</title>
+</head>
+<body>
+    <input id="input-1" type="text" placeholder="Enter your name">
+    <input id="input-2" type="text" placeholder="Enter your father name">
+    <input id="input-3" type="text" placeholder="Enter your scores">
+    <button id="button" onclick="AddInfo()">Submit</button>
+    <table style="border-collapse: collapse;">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Father Name</th>
+                <th>Score</th>
+                <th>Total</th>
+            </tr>
+        </thead>
+        <tbody id="tableBody">
+
+        </tbody>
+    </table>
+    <script>
+        let input1 = document.getElementById('input-1')
+        let input2 = document.getElementById('input-2')
+        let input3 = parseInt(document.getElementById('input-3').value)
+        let button = document.getElementById('button')
+
+        let name = document.getElementById('name')
+        let fatherName = document.getElementById('father-name')
+        let score = document.getElementById('score')
+        let total = document.getElementById('total')
+
+        function AddInfo(){
+            name.innerHTML = input1.value
+            fatherName.innerHTML = input2.value
+            score.innerHTML = input3
+            total.innerHTML += input3
+        }
+
+    </script>
+</body>
+</html>

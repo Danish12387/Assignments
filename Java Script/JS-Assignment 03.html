@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Todo App</title>
+    <style>
+        *{
+            margin: 0px;
+            padding: 0px;
+            font-family: sans-serif;
+        }
+        body{
+            text-align: center;
+        }
+        #input{
+            height: 40px;
+            width: 300px;
+            border-radius: 5px;
+            font-size: 16px;
+            padding-left: 10px;
+        }
+        #input:focus{
+            outline-color: rgb(141, 54, 255);
+            box-shadow: 1px 1px 5px 1px rgb(141, 54, 255);
+        }
+        #btn{
+            height: 43px;
+            width: 100px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 19px;
+            background-color: rgb(141, 54, 255);
+            color: white;
+            border: none;
+            margin-top: 10px;
+            transform: translateY(2px);
+            transition: all .2s ease-out;
+        }
+        #btn:hover{
+            transform: scale(1.1);
+            transform: translateZ(3px);
+        }
+        #container{
+            margin-top: 40px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .todo-div{
+            /* background-color: rgb(231, 215, 255); */
+            box-shadow: 1px 1px 5px .1px grey;
+            width: 420px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            font-size: 21px;
+            margin: 10px 0px;
+            border: none;
+            border-radius: 5px;
+            /* color: white; */
+        }
+        .del-btn{
+            display: block;
+            margin: 10px 0px;
+            height: 35px;
+            width: 80px;
+            border-radius: 5px;
+            border: none;
+            font-size: 15px;
+            cursor: pointer;
+            background-color: rgb(141, 54, 255);
+            color: white;
+            transition: all .2s ease-out;
+        }
+        .del-btn:hover{
+            transform: translateY(-3px);
+        }
+        h2{
+            margin: 10px 0px;
+        }
+    </style>
+</head>
+<body>
+    <input type="text" id="input" placeholder="Add todo">
+    <button id="btn">Add</button>
+    <div id="container"></div>
+    <script>
+        let input = document.getElementById('input')
+        let button = document.getElementById('btn')
+        let cont = document.getElementById('container')
+
+        const todos = JSON.parse(localStorage.getItem('todos')) || []
+
+        for (let i = 0; i < todos.length; i++) {
+            addTodo(todos[i])
+        }
+
+        function addTodo(txt) {
+            let div = document.createElement('div')
+            div.className = 'todo-div'
+
+            let h2 = document.createElement('h2')
+            h2.innerHTML = 'Statement'
+            
+            let todotxt = document.createElement('span')
+            todotxt.className = 'todo-txt'
+            todotxt.innerHTML = txt ? txt : input.value
+
+            let delBtn = document.createElement('button')
+            delBtn.className = 'del-btn'
+            delBtn.innerHTML = 'Delete'
+            delBtn.onclick = function () {
+                div.remove()
+                removeTodo(todotxt.innerHTML)
+            }
+
+            div.appendChild(h2)
+            div.appendChild(todotxt)
+            div.appendChild(delBtn)
+            cont.appendChild(div)
+
+            if (!txt) {
+                addTodoToStorage(input.value)
+                input.value = ''
+            }
+        }
+
+        function addTodoToStorage(txt) {
+            todos.push(txt)
+            localStorage.setItem('todos', JSON.stringify(todos))
+        }
+
+        function removeTodo(txt){
+            let index = todos.indexOf(txt)
+            if(index > -1){
+                todos.splice(index, 1)
+                localStorage.setItem('todos', JSON.stringify(todos))
+            }
+        }
+
+        button.addEventListener('click', function () {
+            addTodo()
+        })
+    </script>
+</body>
+</html>
