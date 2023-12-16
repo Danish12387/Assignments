@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="chat.css">
+    <link rel="stylesheet" href="JS-Assignment 07.css">
+    <title>Chat</title>
+</head>
+<body>
+    <nav>
+        <a href="JS-Assignment 07.html">
+            <h1>Personal Blogging App</h1>
+        </a>
+        <div class="nav-right">
+            <div class="nav-div-1">
+                <img src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png" id="profileimglogo" />
+                <p id="userName" style="color: rgb(236, 236, 236); font-size: 15px;"></p>
+            </div>
+            <div class="nav-div-2">
+                <p id="profile">Profile</p>
+                <p id="myBlog">My Blogs</p>
+                <p id="logout">Logout</p>
+            </div>
+        </div>
+    </nav>
+    <div id="chatContainer">
+        <div id="chat_users"></div>
+        <div id="chat_msg_box">
+            <div id="chat_msgs"></div>
+            <div class="chat_input_btn">
+                <input type="text" id="chat_input" placeholder="Messege...">
+                <button id="chat_btn">Send</button>
+            </div>
+        </div>
+    </div>
+    <script type="module" src="JS-Assignment 07.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/dayjs@1/dayjs.min.js"></script>
+</body>
+</html>

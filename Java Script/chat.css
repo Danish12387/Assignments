@@ -1,0 +1,129 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+#chatContainer {
+    height: 89.5vh;
+    display: flex;
+}
+
+#chat_users {
+    width: 400px;
+    height: 100%;
+    border-right: 1px solid rgb(214, 214, 214);
+    overflow-y: scroll;
+}
+
+#chat_users::-webkit-scrollbar {
+    display: none;
+}
+
+#chat_msg_box {
+    flex: 1;
+    height: 90%;
+    background-color: white;
+}
+
+#chat_msgs {
+    height: 100%;
+    overflow-y: scroll;
+    overflow-x: hidden;
+    padding-right: 20px;
+}
+
+#chat_msgs::-webkit-scrollbar {
+    display: none;
+}
+
+.chat_input_btn{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#chat_input {
+    width: 89%;
+    height: 50px;
+    margin: 0px 5px;
+    font-size: 17px;
+    padding: 0px 15px;
+    border-radius: 100px;
+}
+
+#chat_btn {
+    width: 95px;
+    height: 49px;
+    font-size: 17px;
+    border-radius: 100px;
+    cursor: pointer;
+    background-color: rgb(146, 0, 175);
+    border: none;
+    color: white;
+    transition: all .2s ease-out;
+    margin: 0px 5px;
+}
+
+#chat_btn:hover{
+    background-color: rgb(118, 0, 141);
+}
+
+.chat_users_div {
+    height: 80px;
+    width: 100%;
+    border-bottom: 1px solid rgb(226, 226, 226);
+    font-size: 20px;
+    display: flex;
+    align-items: center;
+    padding-left: 10px;
+    cursor: pointer;
+}
+
+.chat_users_div img {
+    height: 50px;
+    width: 50px;
+    border-radius: 100%;
+}
+
+.chat_users_div span {
+    margin-left: 10px;
+}
+
+.chat_main_div {
+    width: 100%;
+    margin: 10px;
+    height: auto;
+}
+
+.msg_div {
+    padding: 10px;
+    width: auto;
+    min-width: 40px;
+    max-width: 600px;
+    border: 1px solid rgb(238, 238, 238);
+    background-color: rgb(230, 230, 230);
+    border-radius: 10px;
+    font-size: 17px;
+    word-wrap: break-word;
+}
+.current_user_msg{
+    display: flex;
+    justify-content: flex-end;
+}
+.current_user_msg .msg_div{
+    background-color: rgb(146, 0, 175);
+    color: white;
+}
+.current_user_msg .msg_div .time_spam{
+    color: rgb(231, 231, 231);
+}
+.another_user_msg{
+    display: flex;
+    justify-content: flex-start;
+}
+.time_spam{
+    display: block;
+    font-size: 12px;
+    color: grey;
+}

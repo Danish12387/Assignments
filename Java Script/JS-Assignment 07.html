@@ -53,16 +53,20 @@
             <a href="JS-Assignment 07.html">
                 <h1>Personal Blogging App</h1>
             </a>
+            <a href="JS-Assignment 07 chat.html">
+                <h3>Chat</h3>
+            </a>
+            <p></p>
             <div class="nav-right">
                 <div class="nav-div-1">
-                    <img src="https://firebasestorage.googleapis.com/v0/b/blog-app-ab7a6.appspot.com/o/AF8CEA1E-003D-4551-9434-16B89DBF6A5C.JPEG?alt=media&token=79aad38b-8f31-4376-a821-43235dec008b"
-                    alt="">
-                <p id="userName" style="color: rgb(236, 236, 236); font-size: 15px;"></p>
+                    <img src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png"
+                        id="profileimglogo" alt="">
+                    <p id="userName" style="color: rgb(236, 236, 236); font-size: 15px;"></p>
                 </div>
                 <div class="nav-div-2">
-                    <p>Profile</p>
-                    <p>My Blogs</p>
-                    <p id="logout">logout</p>
+                    <p id="profile">Profile</p>
+                    <p id="myBlog">My Blogs</p>
+                    <p id="logout">Logout</p>
                 </div>
             </div>
         </nav>
@@ -79,7 +83,7 @@
             <button class="btn" id="post-blog-btn">Post Blog</button>
         </div>
         <div class="levels">
-            <label><input type="radio" name="query" value="All" checked >All</label>
+            <label><input type="radio" name="query" value="All" checked>All</label>
             <label><input type="radio" name="query" value="Beginner">Beginner</label>
             <label><input type="radio" name="query" value="Intermediate">Intermediate</label>
             <label><input type="radio" name="query" value="Expert">Expert</label>
@@ -97,6 +101,7 @@
     </section>
 
     <script type="module" src="JS-Assignment 07.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/dayjs@1/dayjs.min.js"></script>
 </body>
 
 </html>

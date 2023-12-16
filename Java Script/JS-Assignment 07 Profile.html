@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="JS-Assignment 07.css">
+    <title>Profile</title>
+</head>
+
+<body>
+    <nav>
+        <a href="JS-Assignment 07.html">
+            <h1>Personal Blogging App</h1>
+        </a>
+        <a href="JS-Assignment 07 chat.html">
+            <h2>Chat</h2>
+        </a>
+        <div class="nav-right">
+            <div class="nav-div-1">
+                <img src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png"
+                    id="profileimglogo" alt="" />
+                <p id="userName" style="color: rgb(236, 236, 236); font-size: 15px;"></p>
+            </div>
+            <div class="nav-div-2">
+                <p id="profile">Profile</p>
+                <p id="myBlog">My Blogs</p>
+                <p id="logout">Logout</p>
+            </div>
+        </div>
+    </nav>
+    <h1 id="profileHeading">Profile</h1>
+    <div class="user_profile">
+        <img src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png"
+            alt="Upload Image" id="UserProfileImg">
+        <input type="file" name="user_profile_photo" id="userProfilePhoto">
+
+        <h2 style="margin-left: 10px; margin-top: 10px;">Username</h2>
+        <input type="text" class="userProfileInput" id="profileUserName" placeholder="Change Username">
+
+        <h2 style="margin-left: 10px; margin-top: 10px;">Password</h2>
+        <input type="text" class="userProfileInput" id="CurrentPassword" placeholder="Current Password">
+        <input type="text" class="userProfileInput" id="NewPassword" placeholder="New Password">
+        <input type="text" class="userProfileInput" id="RepeatPassword" placeholder="Repeat Password">
+        <button id="userProfileBtn">Update Profile</button>
+    </div>
+    <script type="module" src="JS-Assignment 07.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/dayjs@1/dayjs.min.js"></script>
+</body>
+
+</html>

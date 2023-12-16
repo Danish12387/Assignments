@@ -47,7 +47,7 @@
     }
     nav input[type=text] {
     width: 200px;
-    transition: ease-in-out, width .35s ease-in-out;
+    transition: ease-in-out, width .2s ease-out;
     border-radius: 5px;
     height: 40px;
     border: 1px solid grey;
@@ -91,7 +91,7 @@
     
     .card {
     height: 520px;
-    width: 300px;
+    width: 350px;
     margin: 10px 10px;
     padding: 10px;
     cursor: pointer;

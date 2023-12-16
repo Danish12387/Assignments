@@ -170,7 +170,7 @@ input[type="checkbox"]:focus {
     min-width: 400px;
 }
 
-#postBlogForm{
+#postBlogForm {
     display: flex;
     flex-direction: column;
     justify-content: space-evenly;
@@ -181,14 +181,14 @@ input[type="checkbox"]:focus {
     height: 35px;
 }
 
-.postBlog .labels{
+.postBlog .labels {
     display: flex;
     align-items: center;
     justify-content: space-between;
     width: 500px;
 }
 
-.postBlog label{
+.postBlog label {
     display: flex;
     align-items: center;
     height: 20px;
@@ -197,7 +197,7 @@ input[type="checkbox"]:focus {
     font-size: 18px;
 }
 
-.postBlog label input{
+.postBlog label input {
     margin: 10px;
 }
 
@@ -235,9 +235,11 @@ input[type="checkbox"]:focus {
     position: absolute;
     right: 40px;
     top: 0;
+    background-color: rgba(123, 0, 148);
+    padding-right: 10px;
 }
 
-.nav-div-1{
+.nav-div-1 {
     display: flex;
     align-items: center;
     justify-content: flex-end;
@@ -246,32 +248,38 @@ input[type="checkbox"]:focus {
     margin-right: 5px;
 }
 
-.nav-div-2{
+.nav-div-2 {
     background-color: rgba(123, 0, 148);
-    width: 150px;
-    height: 107px;
+    width: 170px;
+    height: 170px;
     font-size: 20px;
-    border: 1px solid rgb(70, 70, 70);
+    border: 1px solid rgba(123, 0, 148);
     text-align: center;
-    display: none;
+    position: absolute;
+    z-index: -1;
+    transition: all .2s ease-out;
+    top: -150%;
+    box-shadow: 0px 1px 5px 1px rgb(179, 179, 179);
 }
 
-.nav-div-2 p:nth-child(1){
+.nav-div-2 p:nth-child(1) {
     cursor: pointer;
     border-bottom: 1px solid rgb(70, 70, 70);
-    padding: 5px;
-}
-.nav-div-2 p:nth-child(2){
-    cursor: pointer;
-    border-bottom: 1px solid rgb(70, 70, 70);
-    padding: 5px;
-}
-.nav-div-2 p:nth-child(3){
-    cursor: pointer;
-    padding: 5px;
+    padding: 15px;
 }
 
-.nav-right img{
+.nav-div-2 p:nth-child(2) {
+    cursor: pointer;
+    border-bottom: 1px solid rgb(70, 70, 70);
+    padding: 15px;
+}
+
+.nav-div-2 p:nth-child(3) {
+    cursor: pointer;
+    padding: 15px;
+}
+
+.nav-right img {
     width: 50px;
     height: 50px;
     border-radius: 50%;
@@ -282,6 +290,7 @@ input[type="checkbox"]:focus {
     display: flex;
     align-items: center;
     justify-content: center;
+    display: none;
     height: 100vh;
     width: 100%;
 }
@@ -347,28 +356,28 @@ input[type="checkbox"]:focus {
     box-shadow: 1px 1px 5px rgb(197, 197, 197);
 }
 
-.blog-main{
+.blog-main {
     word-wrap: break-word;
     margin-bottom: 10px;
 }
 
-.blog-title{
+.blog-title {
     margin: 10px;
     margin-left: 0px;
     margin-top: 0px;
 }
 
-.blog-desc{
+.blog-desc {
     display: block;
 }
 
-#blog .del-btn{
+#blog .del-btn {
     width: 50px;
     color: rgb(92, 0, 110);
     cursor: pointer;
 }
 
-.levels{
+.levels {
     margin-left: 100px;
     /* background-color: #b3d4fc;    */
     width: 600px;
@@ -378,19 +387,87 @@ input[type="checkbox"]:focus {
     font-size: 18px;
 }
 
-.levels label{
+.levels label {
     cursor: pointer;
 }
 
-.levels input{
+.levels input {
     margin: 10px;
     cursor: pointer;
 }
 
-#filterBtn{
+#filterBtn {
     width: 80px;
     height: 40px;
     cursor: pointer;
     border-radius: 5px;
     font-size: 16px;
+}
+
+#profileHeading {
+    margin-left: 100px;
+    margin-top: 20px;
+}
+
+
+.user_profile {
+    margin-left: 150px;
+    margin-top: 20px;
+    background-color: white;
+    border-radius: 12px;
+    display: flex;
+    width: 700px;
+    height: 870px;
+    padding: 24px;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 15px;
+    border: 1px solid rgb(230, 230, 230);
+    margin-bottom: 100px;
+}
+
+.user_profile img {
+    width: 300px;
+    height: 320px;
+    border-radius: 10px;
+}
+
+.userProfileInput {
+    display: block;
+    height: 55px;
+    width: 400px;
+    border-radius: 5px;
+    font-size: 17px;
+    padding-left: 10px;
+    border: 1px solid rgb(201, 201, 201);
+}
+
+.userProfileInput:focus {
+    outline: 1px solid rgba(123, 0, 148, 0.5);
+    box-shadow: 0px 0px 6px 1px rgba(123, 0, 148, 0.5);
+    border: none;
+}
+
+#userProfilePhoto {
+    height: 30px;
+    cursor: pointer;
+    width: 250px;
+    font-size: 17px;
+    display: block;
+}
+
+#userProfileBtn {
+    height: 50px;
+    width: 150px;
+    border-radius: 5px;
+    cursor: pointer;
+    background-color: rgb(129, 0, 155);
+    color: white;
+    border: none;
+    font-size: 18px;
+    transition: transform .2s ease-out, background-color .5s ease-in, color .3s ease-out;
+}
+
+#userProfileBtn:hover {
+    transform: scale(1.07);
 }
