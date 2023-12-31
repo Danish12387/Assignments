@@ -10,12 +10,19 @@
     <div class="container">
         <div class="Sub-container">
             <div class="navbar">
+                <div class="sidebar">
+                    <span class="sidebar_span" id="X">X</span>
+                    <div class="sidebar_btn_div">
+                        <button class="button">Sign In</button>
+                    </div>
+                </div>
                 <nav>
+                    <span id="H">H</span>
                     <div class="logo">
                         <img src="../Imgages/NEtflix.png" alt="">
                     </div>
-                    <div class="button">
-                        <button>Sign In</button>
+                    <div class="btn_div">
+                        <button class="button">Sign In</button>
                     </div>
                 </nav>
             </div>
@@ -30,5 +37,17 @@
             </div>
         </div>
     </div>
+    <script>
+        const H = document.getElementById('H');
+        const sideBar = document.querySelector('.sidebar');
+        const X = document.getElementById('X')
+
+        H.addEventListener('click',()=>{
+            sideBar.style.left = '0'
+        })
+        X.addEventListener('click',()=>{
+            sideBar.style.left = '-70%'
+        })
+    </script>
 </body>
 </html>

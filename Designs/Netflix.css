@@ -1,30 +1,34 @@
-*{
+* {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
-body{
+
+body {
     background-color: rgb(71, 71, 71);
     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
 }
-.container{
+
+.container {
     background-image: url(../Imgages/netflix\ back.jpg);
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
     width: 100%;
     height: 95vh;
-    color: #ffff;   
+    color: #ffff;
     position: relative;
     z-index: 1;
 }
-.Sub-container{
+
+.Sub-container {
     height: 100%;
     position: relative;
     display: flex;
     flex-direction: column;
 }
-.Sub-container::before{
+
+.Sub-container::before {
     content: '';
     position: absolute;
     height: 100%;
@@ -33,23 +37,28 @@ body{
     opacity: .7;
     z-index: -2;
 }
-.Sub-container h1{
+
+.Sub-container h1 {
     font-size: 55px;
 }
-.Sub-container h3{
+
+.Sub-container h3 {
     font-size: 28px;
     margin: 10px;
     font-weight: 50;
 }
-.Sub-container p{
+
+.Sub-container p {
     font-size: 22px;
     margin: 10px;
 }
-.logo img{
+
+.logo img {
     height: 100px;
     width: 180px;
 }
-.mini{
+
+.mini {
     text-align: center;
     display: flex;
     flex-direction: column;
@@ -57,19 +66,48 @@ body{
     justify-content: center;
     flex: 10;
 }
-.navbar{
+
+.navbar {
     display: flex;
     flex: 1;
     justify-content: center;
+    position: relative;
 }
-nav{
-    width: 80%;
+.sidebar{
+    background-color: rgba(0, 0, 0, .7);
+    position: absolute;
+    width: 70%;
+    top: 0;
+    left: -70%;
+    display: flex;
+    flex-direction: column;
+    align-items: end;
+    height: 100vh;
+    transition: all .3s ease-out;
+}
+.sidebar_span{
+    margin: 10px;
+    font-size: 28px;
+}
+.sidebar_btn_div{
+    /* background-color: aqua; */
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    padding: 10px;
+    border-top: 1px solid grey;
+    border-bottom: 1px solid grey;
+}
+
+nav {
+    width: 90%;
     height: 80px;
     display: flex;
     justify-content: space-between;
     align-items: center;
 }
-nav .button button{
+
+.button {
     height: 35px;
     width: 80px;
     background-color: red;
@@ -82,28 +120,40 @@ nav .button button{
     transition: transform .2s ease-in-out;
     transition: transform .2s ease-out, background-color .5s ease-in-out;
 }
-nav .button button:hover{
+
+#H{
+    font-size: 20px;
+    display: none;
+}
+
+.button:hover {
     background-color: rgb(214, 0, 0);
     transform: scale(1.1);
 }
-.input{
+
+.input {
     width: 580px;
     display: flex;
     justify-content: space-evenly;
 }
-.input input{
+
+.input input {
     height: 50px;
     width: 350px;
     border-radius: 5px;
     background-color: rgba(0, 0, 0, 0.4);
     border: 1px solid grey;
-}
-.input input::placeholder{
+    color: white;
     font-size: 18px;
     padding-left: 10px;
+}
+
+.input input::placeholder {
+    font-size: 18px;
     color: rgb(173, 173, 173);
 }
-.input button{
+
+.input button {
     height: 52px;
     width: 200px;
     font-size: 22px;
@@ -115,7 +165,130 @@ nav .button button:hover{
     cursor: pointer;
     transition: transform .2s ease-out, background-color .5s ease-out;
 }
-.input button:hover{
+
+.input button:hover {
     background-color: rgb(194, 0, 0);
     transform: scale(1.05);
+}
+
+@media (max-width:600px) {
+    .input{
+        width: 500px;
+    }
+    .input input{
+        width: 300px;
+    }
+    .input button{
+        width: 150px;
+        font-size: 18px;
+    }
+    .Sub-container h1 {
+        font-size: 45px;
+    }
+    .Sub-container h3 {
+        font-size: 24px;
+    }
+    .Sub-container p {
+        font-size: 20px;
+    }
+}
+@media (max-width:510px){
+    .input{
+        width: 450px;
+    }
+    .input input{
+        width: 270px;
+    }
+    .input button{
+        width: 130px;
+        font-size: 18px;
+    }
+}
+@media (max-width:450px){
+    .input{
+        width: 400px;
+    }
+    .input input{
+        width: 240px;
+    }
+    .input button{
+        width: 120px;
+        font-size: 16px;
+    }
+    .Sub-container h1 {
+        font-size: 40px;
+    }
+    .Sub-container h3 {
+        font-size: 22px;
+    }
+    .Sub-container p {
+        font-size: 18px;
+    }
+}
+@media (max-width:420px){
+    .input{
+        width: 350px;
+    }
+    .input input{
+        width: 220px;
+        font-size: 15px;
+    }
+    .input button{
+        width: 100px;
+        font-size: 16px;
+    }
+}
+@media (max-width:350px){
+    .input{
+        width: 300px;
+        flex-direction: column;
+        align-items: center;
+        justify-content: space-between;
+        height: 120px;
+    }
+    .input input{
+        width: 300px;
+    }
+    .input button{
+        width: 150px;
+        font-size: 16px;
+        display: block;
+    }
+    .Sub-container h1 {
+        font-size: 30px;
+    }
+    .Sub-container h3 {
+        font-size: 19px;
+    }
+    .Sub-container p {
+        font-size: 17px;
+    }
+
+    .btn_div{
+        display: none;
+    }
+    #H{
+        display: block;
+    }
+}
+@media (max-width:315px){
+    .input{
+        width: 95%;
+    }
+    .input input{
+        width: 100%;
+    }
+    .input button{
+        width: 130px;
+        height: 42px;
+    }
+    .Sub-container h1 {
+        font-size: 26px;
+    }
+    .Sub-container h3 {
+        font-size: 17px;
+    }
+    .Sub-container p {
+        font-size: 16px;
+    }
 }
