@@ -395,7 +395,7 @@ async function getAllUsers() {
         const span = document.createElement('span')
         span.innerText = userInfo.username
         const img = document.createElement('img')
-        img.src = userInfo.profileImage ? userInfo.profileImage : 'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png'
+        img.src = userInfo.profileImage ? userInfo.profileImage : 'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png';
 
         if (chatUsers) {
             div.appendChild(img)
