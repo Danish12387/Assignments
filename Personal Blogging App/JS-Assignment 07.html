@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Personal Blogging App</title>
+    <link rel="stylesheet" href="JS-Assignment 07.css">
+</head>
+
+<body>
+    <div id="sign-up-page">
+        <nav>
+            <a href="JS-Assignment 07.html">
+                <h1>Personal Blogging App</h1>
+            </a>
+            <a href="#" id="login">Login</a>
+        </nav>
+        <form class="sign-up" id="form-1">
+            <h1 style="cursor: default;">Sign Up</h1>
+            <div class="main">
+                <input type="text" placeholder="User Name" required>
+                <input type="email" placeholder="Enter your Email" required>
+                <input type="password" placeholder="Password" required id="password-1">
+                <input type="password" placeholder="Enter Password Again" required id="password-2">
+                <label id="checkbox"><input type="checkbox" id="checkbox-1"> Show Password</label>
+                <a href="#" id="link">Already have an account?</a>
+            </div>
+            <a href=""><button class="btn">Sign Up</button></a>
+        </form>
+    </div>
+
+    <div id="login-page">
+        <nav>
+            <a href="JS-Assignment 07.html">
+                <h1>Personal Blogging App</h1>
+            </a>
+            <a href="#" id="signup">SignUp</a>
+        </nav>
+        <form class="sign-up-2" id="form-2">
+            <h1 style="cursor: default;">Login</h1>
+            <div class="main-2">
+                <input type="email" placeholder="Enter your Email" required>
+                <input type="password" placeholder="Password" required id="password-3">
+                <label id="checkbox"><input type="checkbox" id="checkbox-2"> Show Password</label>
+            </div>
+            <a href=""><button class="btn">Login</button></a>
+        </form>
+    </div>
+
+    <div id="dashboard">
+        <nav>
+            <a href="JS-Assignment 07.html">
+                <h1>Personal Blogging App</h1>
+            </a>
+            <a href="JS-Assignment 07 chat.html">
+                <h3>Chat</h3>
+            </a>
+            <p></p>
+            <div class="nav-right">
+                <div class="nav-div-1">
+                    <img src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png"
+                        id="profileimglogo" alt="">
+                    <p id="userName" style="color: rgb(236, 236, 236); font-size: 15px;"></p>
+                </div>
+                <div class="nav-div-2">
+                    <p id="profile">Profile</p>
+                    <p id="myBlog">My Blogs</p>
+                    <p id="logout">Logout</p>
+                </div>
+            </div>
+        </nav>
+        <div class="postBlog">
+            <form id="postBlogForm">
+                <input type="text" placeholder="Titile" class="inputs" id="blog-input">
+                <textarea id="textarea" cols="10" rows="5" placeholder="Description" class="inputs"></textarea>
+                <div class="labels">
+                    <label><input type="radio" name="level" value="Beginner">Beginner</label>
+                    <label><input type="radio" name="level" value="Intermediate">Intermediate</label>
+                    <label><input type="radio" name="level" value="Expert">Expert</label>
+                </div>
+            </form>
+            <button class="btn" id="post-blog-btn">Post Blog</button>
+        </div>
+        <div class="levels">
+            <label><input type="radio" name="query" value="All" checked>All</label>
+            <label><input type="radio" name="query" value="Beginner">Beginner</label>
+            <label><input type="radio" name="query" value="Intermediate">Intermediate</label>
+            <label><input type="radio" name="query" value="Expert">Expert</label>
+            <button id="filterBtn">Filter</button>
+        </div>
+        <div id="blog"></div>
+    </div>
+
+    <section class="dots-container">
+        <div class="dot"></div>
+        <div class="dot"></div>
+        <div class="dot"></div>
+        <div class="dot"></div>
+        <div class="dot"></div>
+    </section>
+
+    <script type="module" src="JS-Assignment 07.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/dayjs@1/dayjs.min.js"></script>
+</body>
+
+</html>
