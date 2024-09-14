@@ -22,8 +22,6 @@ const firebaseConfig = {
 };
 
 const app = initializeApp(firebaseConfig);
-const database = getDatabase(app)
-const analytics = getAnalytics(app);
 const auth = getAuth(app)
 const db = getFirestore(app)
 const storage = getStorage(app)
@@ -36,7 +34,7 @@ const signUpPage = document.getElementById('sign-up-page')
 const loginPage = document.getElementById('login-page')
 const dashboard = document.getElementById('dashboard')
 const userName = document.getElementById('userName')
-const dotsContainer = document.querySelector('.dots-container')
+// const dotsContainer = document.querySelector('.dots-container')
 const postBlogBtn = document.getElementById('post-blog-btn')
 const blogInput = document.getElementById('blog-input')
 const blogDesc = document.getElementById('textarea')
@@ -90,7 +88,7 @@ onAuthStateChanged(auth, async (user) => {
                 signUpPage.style.display = 'none'
                 loginPage.style.display = 'none'
                 dashboard.style.display = 'block'
-                dotsContainer.style.display = 'none'
+                // dotsContainer.style.display = 'none'
             }
         }, '1000');
         if (chatContainer) {
@@ -99,8 +97,8 @@ onAuthStateChanged(auth, async (user) => {
         getAllUsers()
         getDataFS()
     } else {
-        signUpPage && (signUpPage.style.display = 'block')
-        dotsContainer.style.display = 'none'
+        signUpPage.style.display = 'block'
+        // dotsContainer.style.display = 'none'
     }
 
 });
@@ -195,14 +193,14 @@ logout?.addEventListener('click', () => {
                 signUpPage.style.display = 'block'
             }
 
-            dotsContainer.style.display = 'flex'
+            // dotsContainer.style.display = 'flex'
             dashboard.style.display = 'none'
             loginPage.style.display = 'none'
             signUpPage.style.display = 'none'
 
             setTimeout(() => {
                 loginPage.style.display = 'block'
-                dotsContainer.style.display = 'none'
+                // dotsContainer.style.display = 'none'
             }, '2000');
 
         })
@@ -397,7 +395,7 @@ async function getAllUsers() {
         const span = document.createElement('span')
         span.innerText = userInfo.username
         const img = document.createElement('img')
-        img.src = userInfo.profileImage ? userInfo.profileImage : 'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png'
+        img.src = userInfo.profileImage ? userInfo.profileImage : 'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png';
 
         if (chatUsers) {
             div.appendChild(img)
@@ -486,8 +484,7 @@ async function getChatMsgs() {
 
 const login = document.getElementById('login')
 const signup = document.getElementById('signup')
-const link1 = document.getElementById('link1')
-const link2 = document.getElementById('link2')
+const link = document.getElementById('link')
 const checkBox1 = document.getElementById('checkbox-1')
 const checkBox2 = document.getElementById('checkbox-2')
 const password1 = document.getElementById('password-1')
@@ -509,14 +506,9 @@ login?.addEventListener('click', () => {
     signUpPage.style.display = 'none'
 })
 
-link1?.addEventListener('click', () => {
+link?.addEventListener('click', () => {
     loginPage.style.display = 'block'
     signUpPage.style.display = 'none'
-})
-
-link2?.addEventListener('click', () => {
-    loginPage.style.display = 'none'
-    signUpPage.style.display = 'block'
 })
 
 checkBox1?.addEventListener('change', () => {
